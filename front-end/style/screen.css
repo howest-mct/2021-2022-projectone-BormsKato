@@ -344,8 +344,8 @@ span:last-child {
 */
 
 .o-container {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
   width: 100%;
   max-width: 70.66666666667em;
   /* 70.... * 18px = 1440px */
