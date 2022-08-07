@@ -1,76 +1,42 @@
-const lanIP = `${window.location.hostname}:5000`;
-const socket = io(`http://${lanIP}`);
+'use strict';
 
-const clearClassList = function (el) {
-  el.classList.remove("c-room--wait");
-  el.classList.remove("c-room--on");
+const provider = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
+const copyright =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>';
+
+let map, layergroup;
+
+const maakMarker = function (coords, adres, campusnaam) {
+  //console.log(coords);
+  const arr_coords = coords.split(',');
+  layergroup.clearLayers();
+  let marker = L.marker(arr_coords).addTo(layergroup);
+  marker.bindPopup(`<h3>${campusnaam}</h3><em>${adres}</em>`);
 };
 
-const listenToUI = function () {
-  const knoppen = document.querySelectorAll(".js-power-btn");
-  for (const knop of knoppen) {
-    knop.addEventListener("click", function () {
-      const id = this.dataset.idlamp;
-      let nieuweStatus;
-      if (this.dataset.statuslamp == 0) {
-        nieuweStatus = 1;
-      } else {
-        nieuweStatus = 0;
-      }
-      //const statusOmgekeerd = !status;
-      clearClassList(document.querySelector(`.js-room[data-idlamp="${id}"]`));
-      document.querySelector(`.js-room[data-idlamp="${id}"]`).classList.add("c-room--wait");
-      socket.emit("F2B_switch_light", { lamp_id: id, new_status: nieuweStatus });
+const addEventsToCampus = function () {
+  const campussen = document.querySelectorAll('.c-campus__row');
+  for (const campus of campussen) {
+    campus.addEventListener('click', function () {
+      const coords = this.querySelector('.js-coords').innerHTML;
+      const adres = this.querySelector('.js-adres').innerHTML;
+      const campusnaam = this.querySelector('.js-campusnaam').innerHTML;
+      maakMarker(coords, adres, campusnaam);
     });
   }
 };
 
-const listenToSocket = function () {
-  socket.on("connected", function () {
-    console.log("verbonden met socket webserver");
-  });
+const init = function () {
+  console.log('init initiated!');
 
-  socket.on("B2F_status_lampen", function (jsonObject) {
-    console.log("alle lampen zijn automatisch uitgezet");
-    console.log("Dit is de status van de lampen");
-    console.log(jsonObject);
-    for (const lamp of jsonObject.lampen) {
-      const room = document.querySelector(`.js-room[data-idlamp="${lamp.id}"]`);
-      if (room) {
-        const knop = room.querySelector(".js-power-btn");
-        knop.dataset.statuslamp = lamp.status;
-        clearClassList(room);
-        if (lamp.status == 1) {
-          room.classList.add("c-room--on");
-        }
-      }
-    }
-  });
+  map = L.map('map').setView([51.041028, 3.398512], 10);
+  L.tileLayer(provider, { attribution: copyright }).addTo(map);
 
-  socket.on("B2F_verandering_lamp", function (jsonObject) {
-    console.log("Er is een status van een lamp veranderd");
-    console.log(jsonObject.lamp.id);
-    console.log(jsonObject.lamp.status);
-
-    const room = document.querySelector(`.js-room[data-idlamp="${jsonObject.lamp.id}"]`);
-    if (room) {
-      const knop = room.querySelector(".js-power-btn"); //spreek de room, als start. Zodat je enkel knop krijgt die in de room staat
-      knop.dataset.statuslamp = jsonObject.lamp.status;
-
-      clearClassList(room);
-      if (jsonObject.lamp.status == 1) {
-        room.classList.add("c-room--on");
-      }
-    }
-  });
-  socket.on("B2F_verandering_lamp_from_HRDWR", function (jsonObject) {
-    console.log(jsonObject)
-  }) 
-
+  if (document.querySelector('.c-campus')) {
+    console.log('oefening2');
+    layergroup = L.layerGroup().addTo(map);
+    addEventsToCampus();
+  }
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  console.info("DOM geladen");
-  listenToUI();
-  listenToSocket();
-});
+document.addEventListener('DOMContentLoaded', init);

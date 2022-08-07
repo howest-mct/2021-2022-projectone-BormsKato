@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Project One: TrackPack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="stylesheet" href="style/screen.css" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="style/screen.css" />
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet" />
+    <link rel="manifest" href="./style/manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+        integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous">
+        </script>
+    <script src="script/dataHandler.js"></script>
+    <script src="script/app.js"></script>
+    <script src="script/mobilenav.js"></script>
+
+</head>
+
+<body class="u-max-width-page ">
+    <div class="c-page">
+        <header class="o-row o-row--md o-row--header">
+            <div class="o-container">
+                <div class="c-header">
+                    <div class="c-header_logo">
+                        <h1>
+                            <a class="c-logo" href="index.html">
+                                TrackPack
+                            </a>
+                        </h1>
+
+
+                    </div>
+                    <div class="c-header__mobile-nav-trigger">
+                        <button class="o-button-reset c-nav-trigger js-toggle-nav">
+                            <svg class="c-nav-trigger__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="c-header__nav c-header__nav--main">
+                    <nav class="c-nav">
+                        <ul class="o-list c-nav__list">
+                            <li class="c-nav__item">
+                                <a href="history.html" class="c-nav__link ">Tracking</a>
+                            </li>
+                            <li class="c-nav__item">
+                                <a href="historyalc.html" class="c-nav__link ">Latest Routes</a>
+                            </li>
+                            <li class="c-nav__item"><a href="users.html" class="c-nav__link">Horses</a></li>
+                            </li>
+                            <li class="c-nav__item"><button class="u-buttonshut js-shutdown">Shutdown</button></li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+
+            </div>
+        </header>
+
+</body>
+
+</html>
