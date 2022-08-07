@@ -3,7 +3,7 @@ import time
 
 try:
   while True:
-    ser = serial.Serial('/dev/ttyS0',baudrate=9600,timeout=3.0)
+    ser = serial.Serial('/dev/serial0',baudrate=9600,timeout=3.0)
     time.sleep(2)
     ser.write(b'Hello')
     a=ser.readline()
