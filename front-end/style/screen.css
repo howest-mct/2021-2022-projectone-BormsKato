@@ -11,23 +11,7 @@
   height: 70vh;
 }
 
-.c-campus {
-  width: 100%;
-  height: 20vh;
-  border-collapse: collapse;
-  border: 1px black solid;
-  margin-bottom: 1em;
-}
 
-.c-campus__cell {
-  border: 1px black solid;
-  height: 2em;
-}
-
-.c-campus__header {
-  background-color: black;
-  color: whitesmoke;
-}
 
 @font-face {
   font-family: 'Inter Web';
