@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracking</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="stylesheet" href="style/screen.css" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="script/app.js"></script>
+</head>
+
+<body class="u-max-width-page ">
+    <div class="c-page">
+        <header class="o-row o-row--md o-row--header">
+            <div class="o-container">
+                <div class="c-header">
+                    <div class="c-header_logo">
+                        <h1>
+                            <a class="c-logo" href="home.html">
+                                TrackPack
+                            </a>
+                        </h1>
+
+
+                    </div>
+                    <div class="c-header__mobile-nav-trigger">
+                        <button class="o-button-reset c-nav-trigger js-toggle-nav">
+                            <svg class="c-nav-trigger__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="c-header__nav c-header__nav--main">
+                    <nav class="c-nav">
+                        <ul class="o-list c-nav__list">
+                            <li class="c-nav__item">
+                                <a href="tracking.html" class="c-nav__link ">Tracking</a>
+                            </li>
+                            <li class="c-nav__item">
+                                <a href="latestroutes.html" class="c-nav__link ">Latest Routes</a>
+                            </li>
+                            <li class="c-nav__item"><a href="horses.html" class="c-nav__link">Horses</a></li>
+                            </li>
+                            <li class="c-nav__item"><button class="u-buttonshut js-shutdown">Shutdown</button></li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+
+            </div>
+        </header>
+
+        <div class="o-container">
+            <div class="o-layout o-layout--align-center">
+                <h3 id="Tracking" class="u-color--dark">Tracking</h3>
+            </div>
+
+            <div class="o-layout o-layout--align-center">
+                <div class="o-layout__item">
+                    <div id="map">
+                    </div>
+                </div>
+                <div class="o-layout__item">
+                    <button class="u-buttonshut js-shutdown">Pauze</button>
+                    <button class="u-buttonshut js-shutdown">Stop</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
