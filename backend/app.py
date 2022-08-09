@@ -63,14 +63,17 @@ def pinkL(pin):
         i +=1
 
 def ldr():
-    ldrdata = klasseMCP.read_channel(1)
-    print(ldrdata)
-    waardeldr = 100 - (ldrdata/1023 *100)
-    print(waardeldr)
-    if waardeldr < 80:
-        GPIO.output(ledPinV, 1)
-    else:
-        GPIO.output(ledPinV, 0)
+    while True:
+        ldrdata = klasseMCP.read_channel(1)
+        print(ldrdata)
+        waardeldr = 100 - (ldrdata/1023 *100)
+        print(waardeldr)
+        if waardeldr < 80:
+            GPIO.output(ledPinV, 1)
+        else:
+            GPIO.output(ledPinV, 0)
+        time.sleep(1)
+        
 
 #LCD
 
@@ -151,15 +154,17 @@ class MPU6050:
       
 
     def print_data(self):
-        print("***")
-        print('De temperatuur is {}°C'.format(self.read_temp()))
-        accel = self.read_accel()
-        print('Accel: x = {0}, y = {1}, z = {2}'.format(
-            accel[0], accel[1], accel[2]))
-        gyro = self.read_gyro()
-        print('Gyro : x = {0}°/s, y = {1}°/s, z = {2}°/s'.format(
-            gyro[0], gyro[1], gyro[2]))
-        print()
+        while True:
+            print("***")
+            print('De temperatuur is {}°C'.format(self.read_temp()))
+            accel = self.read_accel()
+            print('Accel: x = {0}, y = {1}, z = {2}'.format(
+                accel[0], accel[1], accel[2]))
+            gyro = self.read_gyro()
+            print('Gyro : x = {0}°/s, y = {1}°/s, z = {2}°/s'.format(
+                gyro[0], gyro[1], gyro[2]))
+            print()
+            time.sleep(1)
 
     @staticmethod
     def combine_bytes(msb, lsb):
@@ -195,11 +200,102 @@ class MPU6050:
             values.append(byte)
         return values
 
+
+
+# Code voor Flask
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'geheim!'
+socketio = SocketIO(app, cors_allowed_origins="*", logger=False,
+                    engineio_logger=False, ping_timeout=1)
+
+CORS(app)
+
+
+@socketio.on_error()        # Handles the default namespace
+def error_handler(e):
+    print(e)
+
+
+# API ENDPOINTS
+
+
+@app.route('/')
+def hallo():
+    return "Server is running, er zijn momenteel geen API endpoints beschikbaar."
+
+
+
+
+
+# START een thread op. Belangrijk!!! Debugging moet UIT staan op start van de server, anders start de thread dubbel op
+# werk enkel met de packages gevent en gevent-websocket.
+def all_out():
+    while True:
+        print('*** We zetten alles uit **')
+#         DataRepository.update_status_alle_lampen(0)
+#         GPIO.output(ledPin, 0)
+#         status = DataRepository.read_status_lampen()
+#         socketio.emit('B2F_status_lampen', {'lampen': status})
+#         time.sleep(15)
+
+def start_thread():
+    print("**** Starting THREAD ****")
+    thread = threading.Thread(target=all_out, args=(), daemon=True)
+    thread.start()
+
+
+def start_chrome_kiosk():
+    import os
+
+    os.environ['DISPLAY'] = ':0.0'
+    options = webdriver.ChromeOptions()
+    # options.headless = True
+    # options.add_argument("--window-size=1920,1080")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36")
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--allow-running-insecure-content')
+    options.add_argument("--disable-extensions")
+    # options.add_argument("--proxy-server='direct://'")
+    options.add_argument("--proxy-bypass-list=*")
+    options.add_argument("--start-maximized")
+    options.add_argument('--disable-gpu')
+    # options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--kiosk')
+    # chrome_options.add_argument('--no-sandbox')         
+    # options.add_argument("disable-infobars")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+
+    driver = webdriver.Chrome(options=options)
+    driver.get("http://localhost")
+    while True:
+        pass
+
+
+def start_chrome_thread():
+    print("**** Starting CHROME ****")
+    chromeThread = threading.Thread(target=start_chrome_kiosk, args=(), daemon=True)
+    chromeThread.start()
+
+def start_mpu_thread():
+    print("**** Starting mpu ****")
+    ThreadData = threading.Thread(target=mpu.print_data, args=(), daemon=True)
+    ThreadData.start()
+
+def start_ldr_thread():
+    print("**** Starting ldr ****")
+    ThreadAlc = threading.Thread(target=ldr, args=(), daemon=True)
+    ThreadAlc.start()
+
 if __name__ == '__main__':
     lcd_init()
     setup_gpio()
     ip=''
+    start_chrome_thread()
     print("**** Starting APP ****")
+    
     try:
         mpu = MPU6050(0x68)
         lcd_string("Looking for IP ",LCD_LINE_1)
@@ -216,12 +312,14 @@ if __name__ == '__main__':
             lcd_string("TrackPack",LCD_LINE_2)
             time.sleep(2)
             show_ip()
-            while True:
-                mpu.print_data()
-                ldr()
-                time.sleep(1)
+            # mpu.print_data()
+            # ldr()
+            start_mpu_thread()
+            start_ldr_thread()
+            time.sleep(1)
+                
+            socketio.run(app, debug=False, host='0.0.0.0')
         
-        # socketio.run(app, debug=False, host='0.0.0.0')
         
     except KeyboardInterrupt:
         print ('KeyboardInterrupt exception is caught')

@@ -1,4 +1,7 @@
 'use strict';
+// const lanIP = `${window.location.hostname}:5000`;
+// const socket = io(`http://${lanIP}`);
+
 
 const provider = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
 const copyright =
@@ -14,17 +17,6 @@ const maakMarker = function (coords, adres, campusnaam) {
   marker.bindPopup(`<h3>${campusnaam}</h3><em>${adres}</em>`);
 };
 
-const addEventsToCampus = function () {
-  const campussen = document.querySelectorAll('.c-campus__row');
-  for (const campus of campussen) {
-    campus.addEventListener('click', function () {
-      const coords = this.querySelector('.js-coords').innerHTML;
-      const adres = this.querySelector('.js-adres').innerHTML;
-      const campusnaam = this.querySelector('.js-campusnaam').innerHTML;
-      maakMarker(coords, adres, campusnaam);
-    });
-  }
-};
 
 const init = function () {
   console.log('init initiated!');
