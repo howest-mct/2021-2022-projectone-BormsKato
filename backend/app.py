@@ -296,6 +296,7 @@ if __name__ == '__main__':
     start_chrome_thread()
     print("**** Starting APP ****")
     
+    
     try:
         mpu = MPU6050(0x68)
         lcd_string("Looking for IP ",LCD_LINE_1)
@@ -303,7 +304,7 @@ if __name__ == '__main__':
         while len(ip)< 7 and ip[0:1] != 1:
             ipfull=str(check_output(['ip','a']))
             # min=int(ipfull.find('172.30.252'))
-            min=int(ipfull.find('192.168.1.'))
+            min=int(ipfull.find('192.168.143.'))
             ip=str(ipfull[min:min +13])
             # print(ip)
             time.sleep(1)

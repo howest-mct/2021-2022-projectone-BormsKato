@@ -13,7 +13,9 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
+    <script src="script/dataHandler.js"></script>
     <script src="script/app.js"></script>
+    <script src="script/mobilenav.js"></script>
 </head>
 
 <body class="u-max-width-page ">
@@ -61,25 +63,75 @@
             </div>
         </header>
 
-        <div class="o-container">
-            <div class="o-layout o-layout--align-center">
-                <h3 id="Home" class="u-color--dark">Home</h3>
-            </div>
+        <section class="o-row o-row--md u-max-width-md">
+            <div class="o-container">
+                <div class="o-layout o-layout--align-center">
+                    <h3 id="Home" class="u-color--dark">Home</h3>
+                </div>
 
-            <div class="o-layout o-layout--align-center">
-                <div class="o-layout__item">
-                    <div id="map">
+                <div class="o-container ">
+                    <div class="o-layout__item">
+                        <div id="map">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="o-layout o-layout--align-center ">
-                <div class="o-layout__item">
+                <div class="o-layout ">
                     <button class="u-buttonshut js-shutdown">Start</button>
                 </div>
             </div>
-        </div>
+        </section>
+        <section class="o-row o-row--md u-max-width-md">
+            <div class="o-container">
+                <div>
+                    <div>
+                        <h3 class="js-name u-color--dark">Choose your horse</h3>
+                        <p class="u-text">Chose which horse you're taking on a walk.</p>
+                    </div>
+                    <div class="o-layout o-layout--align-center">
+                        <input type="radio" id="shankar" name="id" value="933210265772">
+                        <label for="shankar" class="u-text">Lily</label><br>
+                        <input type="radio" id="willy" name="id" value="453047185099">
+                        <label for="willy" class="u-text">Cyrano</label><br>
+                        <input type="radio" id="JP" name="id" value="648955705971">
+                        <label for="JP" class="u-text">Calypso</label><br>
 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="c-mobile-nav">
+            <div class="c-mobile-nav__bg"></div>
+            <div class="c-mobile-nav__body">
+                <div class="c-mobile-nav__header">
+                    <a class="c-logo" href="index.html">
+                        TrackPack
+                    </a>
+                    <button class="o-button-reset c-nav-trigger js-toggle-nav">
+                        <svg class="c-nav-trigger__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="c-mobile-nav__nav c-mobile-nav__nav--main">
+                    <nav class="c-nav">
+                        <ul class="o-list c-nav__list">
+                            <li class="c-nav__item">
+                                <a href="tracking.html" class="c-nav__link ">Tracking</a>
+                            </li>
+                            <li class="c-nav__item">
+                                <a href="latestroutes.html" class="c-nav__link ">Latest Routes</a>
+                            </li>
+                            <li class="c-nav__item"><a href="horses.html" class="c-nav__link">Horses</a></li>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </aside>
 </body>
 
 </html>

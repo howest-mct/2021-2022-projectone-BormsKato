@@ -17,6 +17,10 @@ const maakMarker = function (coords, adres, campusnaam) {
   marker.bindPopup(`<h3>${campusnaam}</h3><em>${adres}</em>`);
 };
 
+// const printData = function(data){
+//   console.log(data)
+// }
+
 
 const init = function () {
   console.log('init initiated!');
@@ -24,11 +28,7 @@ const init = function () {
   map = L.map('map').setView([51.041028, 3.398512], 10);
   L.tileLayer(provider, { attribution: copyright }).addTo(map);
 
-  if (document.querySelector('.c-campus')) {
-    console.log('oefening2');
-    layergroup = L.layerGroup().addTo(map);
-    addEventsToCampus();
-  }
+
 };
 
 document.addEventListener('DOMContentLoaded', init);
