@@ -307,14 +307,12 @@ if __name__ == '__main__':
     ip=''
     start_chrome_thread()
     print("**** Starting APP ****")
-    
-    
     try:
         mpu = MPU6050(0x68)
         lcd_string("Looking for IP ",LCD_LINE_1)
         lcd_string("Loading...",LCD_LINE_2)
-        blabla = Database.get_rows("SELECT * FROM horses ")
-        print(blabla)
+        # blabla = Database.get_rows("SELECT * FROM horses ")
+        # print(blabla)
         
         while len(ip)< 7 and ip[0:1] != 1:
             ipfull=str(check_output(['ip','a']))
@@ -324,9 +322,9 @@ if __name__ == '__main__':
             # print(ip)
             time.sleep(1)
         if len(ip)>7:
-            
             lcd_string("Welcome! ",LCD_LINE_1)
             lcd_string("TrackPack",LCD_LINE_2)
+            print("bij lcd")
             time.sleep(2)
             show_ip()
             # mpu.print_data()
