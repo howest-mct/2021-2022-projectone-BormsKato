@@ -66,7 +66,7 @@ const error_get = function () {
 
 //Socketio Javascript
 const listenToSocket = function () {
-  socketio.on('connect', function () {
+  socket.on('connect', function () {
     console.log('verbonden met socket webserver');
   });
 

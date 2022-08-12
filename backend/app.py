@@ -11,6 +11,7 @@ from flask_cors import CORS
 from flask_socketio import SocketIO, emit, send
 from flask import Flask, jsonify
 from repositories.DataRepository import DataRepository
+from repositories.Database import Database
 
 
 from selenium import webdriver
@@ -218,14 +219,25 @@ def error_handler(e):
 
 
 # API ENDPOINTS
-
+endpoint = '/api/v1'
 
 @app.route('/')
 def hallo():
     return "Server is running, er zijn momenteel geen API endpoints beschikbaar."
 
+@app.route(endpoint + '/horses/', methods=['GET'])
+def read_horses():
+    print('Get horses')
+    result = DataRepository.read_horses()
+    return jsonify(result)
 
-
+#SocketIO
+try:
+    @socketio.on('connect')
+    def initial_connection():
+        print('A new client connect')
+except Exception as e:
+    print("socket crashed!! ",e)
 
 
 # START een thread op. Belangrijk!!! Debugging moet UIT staan op start van de server, anders start de thread dubbel op
@@ -301,6 +313,9 @@ if __name__ == '__main__':
         mpu = MPU6050(0x68)
         lcd_string("Looking for IP ",LCD_LINE_1)
         lcd_string("Loading...",LCD_LINE_2)
+        blabla = Database.get_rows("SELECT * FROM horses ")
+        print(blabla)
+        
         while len(ip)< 7 and ip[0:1] != 1:
             ipfull=str(check_output(['ip','a']))
             # min=int(ipfull.find('172.30.252'))
@@ -309,6 +324,7 @@ if __name__ == '__main__':
             # print(ip)
             time.sleep(1)
         if len(ip)>7:
+            
             lcd_string("Welcome! ",LCD_LINE_1)
             lcd_string("TrackPack",LCD_LINE_2)
             time.sleep(2)
@@ -318,7 +334,6 @@ if __name__ == '__main__':
             start_mpu_thread()
             start_ldr_thread()
             time.sleep(1)
-                
             socketio.run(app, debug=False, host='0.0.0.0')
         
         
