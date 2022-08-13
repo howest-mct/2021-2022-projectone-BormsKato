@@ -9,12 +9,14 @@ from subprocess import check_output
 
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, send
+import socket
 from flask import Flask, jsonify
 from repositories.DataRepository import DataRepository
 from repositories.Database import Database
 
 
 from selenium import webdriver
+
 
 # from selenium import webdriver
 # from selenium.webdriver.chrome.options import Options
@@ -231,13 +233,12 @@ def read_horses():
     result = DataRepository.read_horses()
     return jsonify(result)
 
+
 #SocketIO
-try:
-    @socketio.on('connect')
-    def initial_connection():
-        print('A new client connect')
-except Exception as e:
-    print("socket crashed!! ",e)
+@socketio.on('connect')
+def initial_connection():
+    print('A new client connected')
+
 
 
 # START een thread op. Belangrijk!!! Debugging moet UIT staan op start van de server, anders start de thread dubbel op

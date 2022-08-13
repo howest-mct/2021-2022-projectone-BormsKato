@@ -3,8 +3,9 @@ console.log(lanIP)
 const socketio = io(`${lanIP}`);
 
 
-const getUsers = function () {
+const gethorses = function () {
   const url = lanIP + '/api/v1/horses/';
+  console.log("horses get")
   console.log(url)
   handleData(url, fill_table_horses,error_get);
 };
