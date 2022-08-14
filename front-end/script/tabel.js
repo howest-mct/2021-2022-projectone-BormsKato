@@ -1,35 +1,35 @@
-'use strict';
+// 'use strict';
 
-const lanIP = `${window.location.hostname}:5000`;
-const socketio = io(`${lanIP}`);
+// // const lanIP = `${window.location.hostname}:5000`;
+// // const socketio = io(`${lanIP}`);
 
-const getHistory = function () {
+// const getHistory = function () {
     
-  const url = '/api/v1/history/';
-  handleData(url, fill_table);
-};
-const fill_table=function(jsonObject){
-    console.log(jsonObject)
-    // let htmlString='';
-    // for(let data of data){
-    //     console.log(log)
-    //     htmlString += `
-    //         <tr class="c-row js-header">
-    //         <td class="c-cell">${log.date}</td>
-    //         <td class="c-cell">${log.amount}ml</td>
-    //         </tr>`;   
+//   const url = '/api/v1/history/';
+//   handleData(url, fill_table);
+// };
+// const fill_table=function(jsonObject){
+//     console.log(jsonObject)
+//     // let htmlString='';
+//     // for(let data of data){
+//     //     console.log(log)
+//     //     htmlString += `
+//     //         <tr class="c-row js-header">
+//     //         <td class="c-cell">${log.date}</td>
+//     //         <td class="c-cell">${log.amount}ml</td>
+//     //         </tr>`;   
     
-    // }
-    // document.querySelector('.js-table').innerHTML=htmlString
-}
+//     // }
+//     // document.querySelector('.js-table').innerHTML=htmlString
+// }
 
 
 
-const init = function () {
-    getHistory()
-};
+// const init = function () {
+//     getHistory()
+// };
 
-document.addEventListener('DOMContentLoaded', function () {
-  console.log('DOM content loaded');
-  init();
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//   console.log('DOM content loaded');
+//   init();
+// });

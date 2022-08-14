@@ -1,7 +1,7 @@
 'use strict';
 const lanIP = `${window.location.hostname}:5000`;
 const socket = io(`http://${lanIP}`);
-
+let backend = `//${lanIP}/api/v1`;
 
 const provider = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png';
 const copyright =
@@ -9,13 +9,13 @@ const copyright =
 
 let map, layergroup;
 
-const maakMarker = function (coords, adres, campusnaam) {
-  //console.log(coords);
-  const arr_coords = coords.split(',');
-  layergroup.clearLayers();
-  let marker = L.marker(arr_coords).addTo(layergroup);
-  marker.bindPopup(`<h3>${campusnaam}</h3><em>${adres}</em>`);
-};
+// const maakMarker = function (coords, adres, campusnaam) {
+//   //console.log(coords);
+//   const arr_coords = coords.split(',');
+//   layergroup.clearLayers();
+//   let marker = L.marker(arr_coords).addTo(layergroup);
+//   marker.bindPopup(`<h3>${campusnaam}</h3><em>${adres}</em>`);
+// };
 
 // const printData = function(data){
 //   console.log(data)
@@ -32,7 +32,8 @@ const maakMarker = function (coords, adres, campusnaam) {
 // };
 
 const gethorses = function () {
-  const url = lanIP + '/api/v1/horses/';
+  // const url = lanIP + '/api/v1/horses/';
+  const url = backend + `/horses/`
   // console.log(url)
   handleData(url, fill_table_horses, error_get);
 };
@@ -77,8 +78,8 @@ const init = function () {
   const htmlhistory = document.querySelector('.js-table-historiek')
   const htmlhorse = document.querySelector('.js-table-horses')
   const htmlalc = document.querySelector('.js-table-alc')
-  map = L.map('map').setView([51.041028, 3.398512], 10);
-  L.tileLayer(provider, { attribution: copyright }).addTo(map);
+  // map = L.map('map').setView([51.041028, 3.398512], 10);
+  // L.tileLayer(provider, { attribution: copyright }).addTo(map);
 
   if (htmlhorse) {
     console.log('horses')
