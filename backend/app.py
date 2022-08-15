@@ -76,6 +76,7 @@ def ldr():
         else:
             GPIO.output(ledPinV, 0)
         time.sleep(1)
+        return(waardeldr)
         
 
 #LCD
@@ -233,6 +234,13 @@ def read_horses():
     result = DataRepository.read_horses()
     return jsonify(result)
 
+@app.route(endpoint + '/latestroutes/', methods=['GET'])
+def read_history():
+    print('Get history')
+    result = DataRepository.read_history()
+    return jsonify(result)
+
+
 
 #SocketIO
 @socketio.on('connect')
@@ -299,8 +307,8 @@ def start_mpu_thread():
 
 def start_ldr_thread():
     print("**** Starting ldr ****")
-    ThreadAlc = threading.Thread(target=ldr, args=(), daemon=True)
-    ThreadAlc.start()
+    Threadldr = threading.Thread(target=ldr, args=(), daemon=True)
+    Threadldr.start()
 
 if __name__ == '__main__':
     lcd_init()
@@ -318,7 +326,7 @@ if __name__ == '__main__':
         while len(ip)< 7 and ip[0:1] != 1:
             ipfull=str(check_output(['ip','a']))
             # min=int(ipfull.find('172.30.252'))
-            min=int(ipfull.find('192.168.143.'))
+            min=int(ipfull.find('192.168.1.'))
             ip=str(ipfull[min:min +13])
             # print(ip)
             time.sleep(1)

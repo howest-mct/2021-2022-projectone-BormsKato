@@ -555,13 +555,13 @@ span:last-child {
   ---
   Main header of the website
 */
-.c-temperatuur {
+.c-light {
   font-size: 43px;
   color: white;
   padding: 10px;
 }
 
-.c-temperatuur-sm {
+.c-light-sm {
   font-size: 30px;
   color: white;
 }

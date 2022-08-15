@@ -36,3 +36,8 @@ class DataRepository:
     def read_horses():
         sql="SELECT * FROM horses "
         return Database.get_rows(sql)
+
+    @staticmethod
+    def read_history():
+        sql="SELECT * FROM history "
+        return Database.get_rows(sql)
