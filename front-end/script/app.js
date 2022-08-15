@@ -179,7 +179,7 @@ const init = function () {
     listenToSocket()
     
   }
-  while (htmlhome) {
+  if (htmlhome) {
     console.log('licht')
     listenToSocket()
     getldr()
