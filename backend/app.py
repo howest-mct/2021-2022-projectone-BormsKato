@@ -75,8 +75,9 @@ def ldr():
             GPIO.output(ledPinV, 1)
         else:
             GPIO.output(ledPinV, 0)
-        time.sleep(1)
-        return(waardeldr)
+        DataRepository.create_log_ldr(waardeldr)
+        time.sleep(5)
+        
         
 
 #LCD
@@ -240,6 +241,11 @@ def read_history():
     result = DataRepository.read_history()
     return jsonify(result)
 
+@app.route(endpoint + '/index/', methods=['GET'])
+def read_ldr():
+    print('Get ldr')
+    result = DataRepository.read_ldr()
+    return jsonify(result)
 
 
 #SocketIO

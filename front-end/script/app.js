@@ -45,6 +45,12 @@ const gethistory = function () {
   handleData(url, fill_table_history, error_get_history);
 };
 
+const getldr = function () {
+  // const url = lanIP + '/api/v1/horses/';
+  const url = backend + `/index/`
+  // console.log(url)
+  handleData(url, fill_light, error_get_ldr);
+};
 
 const fill_table_horses = function (jsonObject) {
   console.log(jsonObject)
@@ -87,6 +93,24 @@ const fill_table_history = function (jsonObject) {
 
 }
 
+const fill_light = function (jsonObject) {
+  console.log(jsonObject)
+  let htmlString = ''
+  let access = ''
+  for (let data of jsonObject) {
+    if (data.Toegang == 1) {
+      access = 'Yes'
+    } else {
+      access = 'No'
+    }
+    htmlString += ` <div class="js-light c-light">
+                  ${data.waarde}%
+                  </div>`
+  }
+  document.querySelector('.js-light').innerHTML = htmlString;
+
+}
+
 
 const error_get = function () {
   let htmlString = `  <td class="c-cell_second">Error</td>
@@ -104,11 +128,27 @@ const error_get_history = function () {
   document.querySelector('.js-table-history').innerHTML = htmlString
 
 }
-// show
-const ShowLight = function (light) {
-  console.log('het lichht' + light)
-  document.querySelector('.js-light').innerHTML = `<p class="c-light js-light">${light}%</p>`
+
+const error_get_ldr = function () {
+  let htmlString = ` <div class="js-light c-light">
+                      error %
+                      </div>`;
+  document.querySelector('.js-light').innerHTML = htmlString
+
 }
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
+// show
+// const ShowLight = function (light) {
+//   console.log('het lichht' + light)
+//   document.querySelector('.js-light').innerHTML = `<p class="c-light js-light">${light}%</p>`
+// }
 
 //Socketio Javascript
 const listenToSocket = function () {
@@ -137,10 +177,13 @@ const init = function () {
     gethistory();
     // listenToShutdown()
     listenToSocket()
+    
   }
-  if (htmlhome) {
+  while (htmlhome) {
+    console.log('licht')
     listenToSocket()
-    ShowLight()
+    getldr()
+    // ShowLight()
     // listenToLockbuttons()
     // listenToTempSocket();
     // listenToShutdown()

@@ -41,3 +41,15 @@ class DataRepository:
     def read_history():
         sql="SELECT * FROM history "
         return Database.get_rows(sql)
+
+    @staticmethod
+    def read_ldr():
+        sql="SELECT waarde from ldr ORDER BY ldrID desc LIMIT 1;"
+        return Database.get_rows(sql)
+
+
+    @staticmethod
+    def create_log_ldr(Waarde):
+        sql = "INSERT INTO `horses`.`ldr` (`waarde`) VALUES (%s);"
+        params = [Waarde]
+        return Database.execute_sql(sql, params)
