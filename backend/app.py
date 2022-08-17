@@ -76,6 +76,7 @@ def ldr():
         else:
             GPIO.output(ledPinV, 0)
         DataRepository.create_log_ldr(waardeldr)
+        socketio.emit('LightData', {'light': f'{ "%.0f" % waardeldr}'})
         time.sleep(5)
         
         
@@ -162,6 +163,8 @@ class MPU6050:
         while True:
             print("***")
             print('De temperatuur is {}°C'.format(self.read_temp()))
+            temp = self.read_temp()
+            socketio.emit('TempData', {'temp': f'{ "%.0f" % temp}'})
             accel = self.read_accel()
             print('Accel: x = {0}, y = {1}, z = {2}'.format(
                 accel[0], accel[1], accel[2]))

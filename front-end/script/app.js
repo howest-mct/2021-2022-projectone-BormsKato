@@ -45,12 +45,6 @@ const gethistory = function () {
   handleData(url, fill_table_history, error_get_history);
 };
 
-const getldr = function () {
-  // const url = lanIP + '/api/v1/horses/';
-  const url = backend + `/index/`
-  // console.log(url)
-  handleData(url, fill_light, error_get_ldr);
-};
 
 const fill_table_horses = function (jsonObject) {
   console.log(jsonObject)
@@ -93,25 +87,6 @@ const fill_table_history = function (jsonObject) {
 
 }
 
-const fill_light = function (jsonObject) {
-  console.log(jsonObject)
-  let htmlString = ''
-  let access = ''
-  for (let data of jsonObject) {
-    if (data.Toegang == 1) {
-      access = 'Yes'
-    } else {
-      access = 'No'
-    }
-    htmlString += ` <div class="js-light c-light">
-                  ${data.waarde}%
-                  </div>`
-  }
-  document.querySelector('.js-light').innerHTML = htmlString;
-
-}
-
-
 const error_get = function () {
   let htmlString = `  <td class="c-cell_second">Error</td>
                     <td class="c-cell_second">Error</td>
@@ -129,13 +104,7 @@ const error_get_history = function () {
 
 }
 
-const error_get_ldr = function () {
-  let htmlString = ` <div class="js-light c-light">
-                      error %
-                      </div>`;
-  document.querySelector('.js-light').innerHTML = htmlString
 
-}
 function sleep(milliseconds) {
   const date = Date.now();
   let currentDate = null;
@@ -145,10 +114,15 @@ function sleep(milliseconds) {
 }
 
 // show
-// const ShowLight = function (light) {
-//   console.log('het lichht' + light)
-//   document.querySelector('.js-light').innerHTML = `<p class="c-light js-light">${light}%</p>`
-// }
+const ShowLight = function (light) {
+  console.log('het lichht' + light)
+  document.querySelector('.js-light').innerHTML = `<p class="c-light js-light">${light}%</p>`
+}
+
+const ShowTemp = function (temp) {
+  console.log('De temperatuur' + temp)
+  document.querySelector('.js-temp').innerHTML = `<p class="c-light js-temp">${temp}°C</p>`
+}
 
 //Socketio Javascript
 const listenToSocket = function () {
@@ -157,6 +131,33 @@ const listenToSocket = function () {
   });
 
 };
+
+// Listen to the socketio
+const listenToLightSocket = function () {
+  // Get light by connect
+  socket.on('B2F_connected', function (parameter) {
+    console.log(`Het is ${parameter.light} %`);
+    ShowLight(parameter.light)
+  });
+  // To get light by thread
+  socket.on('LightData', function (parameter) {
+    console.log(`Het is ${parameter.light} %`);
+    ShowLight(parameter.light)
+  });
+}
+
+const listenToTempSocket = function () {
+  // Get temp by connect
+  socket.on('B2F_connected', function (parameter) {
+    console.log(`Het is ${parameter.temp} °C`);
+    ShowTemp(parameter.temp)
+  });
+  // To get light by thread
+  socket.on('TempData', function (parameter) {
+    console.log(`Het is ${parameter.temp} °C`);
+    ShowTemp(parameter.temp)
+  });
+}
 
 const init = function () {
   
@@ -184,7 +185,9 @@ const init = function () {
     map = L.map('map').setView([51.041028, 3.398512], 10);
     L.tileLayer(provider, { attribution: copyright }).addTo(map);
     listenToSocket()
-    getldr()
+    listenToLightSocket()
+    listenToTempSocket()
+    // getldr()
     // ShowLight()
     // listenToLockbuttons()
     // listenToTempSocket();
