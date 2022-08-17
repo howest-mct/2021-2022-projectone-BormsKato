@@ -159,12 +159,11 @@ const listenToSocket = function () {
 };
 
 const init = function () {
-  map = L.map('map').setView([51.041028, 3.398512], 10);
-  L.tileLayer(provider, { attribution: copyright }).addTo(map);
+  
   const htmlhome = document.querySelector('.js-light')
   const htmlhistory = document.querySelector('.js-table-history')
   const htmlhorse = document.querySelector('.js-table-horses')
-  const htmlalc = document.querySelector('.js-table-alc')
+  const htmltracking = document.querySelector('.js-tracking')
 
 
   if (htmlhorse) {
@@ -182,6 +181,8 @@ const init = function () {
   }
   if (htmlhome) {
     console.log('licht')
+    map = L.map('map').setView([51.041028, 3.398512], 10);
+    L.tileLayer(provider, { attribution: copyright }).addTo(map);
     listenToSocket()
     getldr()
     // ShowLight()
@@ -191,9 +192,10 @@ const init = function () {
     // showChart()
     
   }
-  if (htmlalc) {
-    getAlcHistory()
-    listenToShutdown()
+  if (htmltracking) {
+    console.log("tracking")
+    map = L.map('map').setView([51.041028, 3.398512], 10);
+    L.tileLayer(provider, { attribution: copyright }).addTo(map);
     listenToSocket()
   }
 };
