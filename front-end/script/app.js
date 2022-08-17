@@ -25,8 +25,8 @@ let map, layergroup;
 // const init = function () {
 //   console.log('init initiated!');
 
-//   map = L.map('map').setView([51.041028, 3.398512], 10);
-//   L.tileLayer(provider, { attribution: copyright }).addTo(map);
+  // map = L.map('map').setView([51.041028, 3.398512], 10);
+  // L.tileLayer(provider, { attribution: copyright }).addTo(map);
 
 
 // };
@@ -159,12 +159,13 @@ const listenToSocket = function () {
 };
 
 const init = function () {
+  map = L.map('map').setView([51.041028, 3.398512], 10);
+  L.tileLayer(provider, { attribution: copyright }).addTo(map);
   const htmlhome = document.querySelector('.js-light')
   const htmlhistory = document.querySelector('.js-table-history')
   const htmlhorse = document.querySelector('.js-table-horses')
   const htmlalc = document.querySelector('.js-table-alc')
-  // map = L.map('map').setView([51.041028, 3.398512], 10);
-  // L.tileLayer(provider, { attribution: copyright }).addTo(map);
+
 
   if (htmlhorse) {
     console.log('horses')
