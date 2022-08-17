@@ -77,10 +77,10 @@ const fill_table_history = function (jsonObject) {
       access = 'No'
     }
     htmlString += ` <tr class="c-row u-table o-layout__item o-layout--gutter-lg">
-
-        <td class="c-cell_second">${data.date}</td>
-        <td class="c-cell_second">${data.distance}</td>
         <td class="c-cell_second">${data.horses_horseID}</td>
+        <td class="c-cell_second">${data.date}</td>
+        <td class="c-cell_second">${data.distance} km</td>
+        
       </tr>`
   }
   document.querySelector('.js-table-history').innerHTML = htmlString;
@@ -97,7 +97,6 @@ const error_get = function () {
 }
 const error_get_history = function () {
   let htmlString = `  <td class="c-cell_second">Error</td>
-                    <td class="c-cell_second">Error</td>
                     <td class="c-cell_second">Error</td>
                     <td class="c-cell_second">Error</td>`;
   document.querySelector('.js-table-history').innerHTML = htmlString
@@ -157,6 +156,16 @@ const listenToTempSocket = function () {
     console.log(`Het is ${parameter.temp} °C`);
     ShowTemp(parameter.temp)
   });
+}
+
+
+function toggleNav() {
+  let toggleTrigger = document.querySelectorAll(".js-toggle-nav");
+  for (let i = 0; i < toggleTrigger.length; i++) {
+      toggleTrigger[i].addEventListener("click", function () {
+          document.querySelector("body").classList.toggle("has-mobile-nav");
+      })
+  }
 }
 
 const init = function () {
