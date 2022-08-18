@@ -206,7 +206,7 @@ const init = function () {
   }
   if (htmltracking) {
     console.log("tracking")
-    map = L.map('map').setView([51.041028, 3.398512], 10);
+    map = L.map('map').setView([50.5056281, 3.1771572], 10);
     L.tileLayer(provider, { attribution: copyright }).addTo(map);
     listenToSocket()
   }

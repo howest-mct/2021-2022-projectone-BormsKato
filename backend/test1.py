@@ -6,17 +6,11 @@ import pynmea2
 while True:
 	port="/dev/ttyS0"
 	ser=serial.Serial(port, baudrate=9600, timeout=0.5)
-	# dataout = pynmea2.NMEAStreamReader()
 	newdata=ser.readline()
-	print(newdata)
-	
+	# print(newdata)
+	properdata = newdata.decode('utf-8').replace('b','').replace('$','').replace('\r','').replace('\n','')
+	# print(properdata)
 
-	if newdata[0:9] == "b'$GNRMC":
-		print('ok')
-		# newmsg=pynmea2.parse(newdata)
-		# print(newmsg)
-		# lat=newmsg.latitude
-		# lng=newmsg.longitude
-		# gps = "Latitude=" + str(lat) + "and Longitude=" + str(lng)
-		# print(gps)
-	time.sleep(1)
+	if properdata[0:5] == "GNGGA":
+		print(properdata)
+
