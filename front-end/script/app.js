@@ -57,9 +57,9 @@ const fill_table_horses = function (jsonObject) {
       access = 'No'
     }
     htmlString += ` <tr class="c-row u-table o-layout__item o-layout--gutter-lg">
-        <td class="c-cell_second">${data.horseID}</td>
-        <td class="c-cell_second">${data.name}</td>
-        <td class="c-cell_second">${data.age}</td>
+        <td class="c-cell_second">${data.HorseId}</td>
+        <td class="c-cell_second">${data.naam}</td>
+        <td class="c-cell_second">${data.leeftijd}</td>
       </tr>`
   }
   document.querySelector('.js-table-horses').innerHTML = htmlString;

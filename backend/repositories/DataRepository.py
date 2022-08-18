@@ -38,6 +38,12 @@ class DataRepository:
         return Database.get_rows(sql)
 
     @staticmethod
+    def add_horse(naam, leeftijd):
+        sql="INSERT INTO `horses` (`naam`,`leeftijd` ) VALUES (%s, %s);"
+        params = [naam, leeftijd]
+        return Database.execute_sql(sql, params)
+
+    @staticmethod
     def read_history():
         sql="SELECT * FROM history "
         return Database.get_rows(sql)
