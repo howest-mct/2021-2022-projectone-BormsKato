@@ -85,23 +85,24 @@ def gps():
     while True:
         ser=serial.Serial(port, baudrate=9600, timeout=0.5)
         newdata=ser.readline()
+        # print(newdata)
         properdata = newdata.decode('utf-8').replace('b','').replace('$','').replace('\r','').replace('\n','')
 
-        if properdata[0:5] == "GNGGA":
+        if properdata[0:5] == "GNRMC":
             print(properdata)
-            latitude= properdata[16:26]
+            latitude= properdata[18:28]
             Dlat= latitude[0:2]
             Mlat = latitude[2:4]
             Slat =latitude[5:7]
             latitudeWaarde = int(Dlat) + (int(Mlat)/60) + (int(Slat)/3600)
-            socketio.emit('Latdata', {'lat': f'{latitudeWaarde}'})
+            socketio.emit('Latdata', {'latitudeWaarde': f'{latitudeWaarde}'})
             print(latitudeWaarde)
-            longitude= properdata[31:40]
+            longitude= properdata[33:42]
             Dlong= longitude[0:1]
             Mlong = longitude[1:3]
             Slong =longitude[4:6]
             longitudeWaarde = int(Dlong) + (int(Mlong)/60) + (int(Slong)/3600)
-            socketio.emit('Longdata', {'longitude': f'{ "%.0f" % longitudeWaarde}'})
+            socketio.emit('Longdata', {'longitudeWaarde': f'{longitudeWaarde}'})
             print(longitudeWaarde)
 
 #LCD
@@ -373,8 +374,6 @@ if __name__ == '__main__':
             print("bij lcd")
             time.sleep(2)
             show_ip()
-            # mpu.print_data()
-            # ldr()
             start_mpu_thread()
             start_ldr_thread()
             start_gps_thread()
