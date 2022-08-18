@@ -123,6 +123,11 @@ const ShowTemp = function (temp) {
   document.querySelector('.js-temp').innerHTML = `<p class="c-light js-temp">${temp}°C</p>`
 }
 
+// const ShowLat = function (latitudeWaarde) {
+//   console.log('De latitude' + latitudeWaarde)
+//   // document.querySelector('.js-temp').innerHTML = `<p class="c-light js-temp">${temp}°C</p>`
+// }
+
 //Socketio Javascript
 const listenToSocket = function () {
   socket.on('connect', function () {
@@ -155,6 +160,19 @@ const listenToTempSocket = function () {
   socket.on('TempData', function (parameter) {
     console.log(`Het is ${parameter.temp} °C`);
     ShowTemp(parameter.temp)
+  });
+}
+
+const listenToLatSocket = function () {
+  // Get lat by connect
+  socket.on('B2F_connected', function (parameter) {
+    console.log(`lat ${parameter.latitudeWaarde} `);
+    // ShowLat(parameter.latitudeWaarde)
+  });
+  // To get latitude by thread
+  socket.on('Latdata', function (parameter) {
+    console.log(`lat ${parameter.latitudeWaarde}`);
+    // ShowLat(parameter.latitudeWaarde)
   });
 }
 
@@ -196,6 +214,7 @@ const init = function () {
     listenToSocket()
     listenToLightSocket()
     listenToTempSocket()
+    
     // getldr()
     // ShowLight()
     // listenToLockbuttons()
@@ -206,9 +225,10 @@ const init = function () {
   }
   if (htmltracking) {
     console.log("tracking")
-    map = L.map('map').setView([50.5056281, 3.1771572], 10);
+    map = L.map('map').setView([50.84861111111111, 3.303611111111111], 10);
     L.tileLayer(provider, { attribution: copyright }).addTo(map);
     listenToSocket()
+    listenToLatSocket()
   }
 };
 

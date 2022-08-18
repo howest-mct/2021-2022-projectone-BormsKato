@@ -1,4 +1,5 @@
 import time
+import serial
 from RPi import GPIO
 from helpers.klasseknop import Button
 from helpers.klasseMCP import MCPclass
@@ -31,6 +32,7 @@ ledPinV = 16
 i2c = SMBus()  
 i2c.open(1) 
 
+port="/dev/ttyS0"
 
 # Code voor Hardware
 def setup_gpio():
@@ -79,7 +81,28 @@ def ldr():
         socketio.emit('LightData', {'light': f'{ "%.0f" % waardeldr}'})
         time.sleep(5)
         
-        
+def gps():
+    while True:
+        ser=serial.Serial(port, baudrate=9600, timeout=0.5)
+        newdata=ser.readline()
+        properdata = newdata.decode('utf-8').replace('b','').replace('$','').replace('\r','').replace('\n','')
+
+        if properdata[0:5] == "GNGGA":
+            print(properdata)
+            latitude= properdata[16:26]
+            Dlat= latitude[0:2]
+            Mlat = latitude[2:4]
+            Slat =latitude[5:7]
+            latitudeWaarde = int(Dlat) + (int(Mlat)/60) + (int(Slat)/3600)
+            socketio.emit('Latdata', {'lat': f'{latitudeWaarde}'})
+            print(latitudeWaarde)
+            longitude= properdata[31:40]
+            Dlong= longitude[0:1]
+            Mlong = longitude[1:3]
+            Slong =longitude[4:6]
+            longitudeWaarde = int(Dlong) + (int(Mlong)/60) + (int(Slong)/3600)
+            socketio.emit('Longdata', {'longitude': f'{ "%.0f" % longitudeWaarde}'})
+            print(longitudeWaarde)
 
 #LCD
 
@@ -319,6 +342,11 @@ def start_ldr_thread():
     Threadldr = threading.Thread(target=ldr, args=(), daemon=True)
     Threadldr.start()
 
+def start_gps_thread():
+    print("**** Starting gps ****")
+    Threadgps = threading.Thread(target=gps, args=(), daemon=True)
+    Threadgps.start()
+
 if __name__ == '__main__':
     lcd_init()
     setup_gpio()
@@ -349,6 +377,7 @@ if __name__ == '__main__':
             # ldr()
             start_mpu_thread()
             start_ldr_thread()
+            start_gps_thread()
             time.sleep(1)
             socketio.run(app, debug=False, host='0.0.0.0')
         
