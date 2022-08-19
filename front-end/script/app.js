@@ -222,7 +222,8 @@ function toggleNav() {
   }
 }
 function addhorse() {
-  document.getElementById("paard").innerHTML = "Hello World";
+  console.log('in addhprse')
+  // console.log(naam, leeftijd)
 }
 
 
@@ -241,6 +242,7 @@ const init = function () {
     console.log('horses')
     gethorses()
     listenToSocket();
+    document.getElementById("paard").onclick = function() {addhorse()};
   }
   if (htmlhistory) {
     console.log('history')
