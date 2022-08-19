@@ -40,7 +40,7 @@
 
 
 <body class="u-max-width-page ">
-    <div class="c-page js-tracking">
+    <div class="c-page js-settings">
         <header class="o-row o-row--md o-row--header">
             <div class="o-container">
                 <div class="c-header">
@@ -78,10 +78,20 @@
                         </ul>
                     </nav>
                 </div>
-
-
             </div>
         </header>
+
+        <section class="o-row o-row--md u-max-width-md">
+            <div class="o-container">
+                <form>
+                    <label>Lightpercentage <input type="text" id="lightpercentage" name="lightpercentage"></label>
+                    <button type="submit">Save</button>
+                </form>
+                <div class="o-layout__item">
+                    <button class="u-buttonshut js-shutdown">Shutdown</button>
+                </div>
+            </div>
+        </section>
 
         <aside class="c-mobile-nav">
             <div class="c-mobile-nav__bg"></div>
@@ -117,7 +127,7 @@
         </aside>
 
 
-
+    </div>
 </body>
 
 </html>

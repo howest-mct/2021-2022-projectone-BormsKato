@@ -46,6 +46,31 @@ const gethistory = function () {
 };
 
 
+const getldrinput = function () {
+  const url = backend + `/settings.html?lightpercentage=`+ {waarde};
+  console.log(url)
+//   handleData(url, fill_table_alc, error_get);
+//   for (const radiobutton of document.querySelectorAll('input[name="id"]')) {
+//     radiobutton.addEventListener('click', function () {
+//       if (radiobutton.checked) {
+//         radioid = radiobutton.getAttribute('value')
+//         // console.log(radioid)
+//         if (radioid != '0') {
+//           const url = lanIP + `/api/v1/alchistory/${radioid}/`;
+//           console.log(url)
+//           handleData(url, fill_table_alc, error_get);
+//         } else if (radioid == '0') {
+//           const url = lanIP + `/api/v1/alchistory/`;
+//           console.log(url)
+//           handleData(url, fill_table_alc, error_get);
+
+//         }
+
+//       }
+//     });
+  }
+// };
+
 const fill_table_horses = function (jsonObject) {
   console.log(jsonObject)
   let htmlString = ''
@@ -197,12 +222,16 @@ function toggleNav() {
   }
 }
 
+
+
+
 const init = function () {
   
   const htmlhome = document.querySelector('.js-light')
   const htmlhistory = document.querySelector('.js-table-history')
   const htmlhorse = document.querySelector('.js-table-horses')
   const htmltracking = document.querySelector('.js-tracking')
+  const htmlsettings = document.querySelector('.js-settings')
 
 
   if (htmlhorse) {
@@ -239,6 +268,12 @@ const init = function () {
     
     listenToSocket()
     listenToLatSocket()
+  }
+  if (htmlsettings){
+    console.log("settings")
+    listenToSocket()
+    // settingLdr()
+    getldrinput()
   }
 };
 
