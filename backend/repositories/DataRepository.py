@@ -45,7 +45,7 @@ class DataRepository:
 
     @staticmethod
     def read_history():
-        sql="SELECT * FROM history "
+        sql="SELECT H.naam,W.Datum, W.Afstand FROM wandelingHistoriek as W LEFT JOIN horses as H ON W.HorseId=H.HorseId ORDER BY W.Datum desc LIMIT 30 ;"
         return Database.get_rows(sql)
 
     @staticmethod

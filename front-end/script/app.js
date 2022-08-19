@@ -31,6 +31,7 @@ let map, layergroup;
 
 // };
 
+
 const gethorses = function () {
   // const url = lanIP + '/api/v1/horses/';
   const url = backend + `/horses/`
@@ -102,9 +103,9 @@ const fill_table_history = function (jsonObject) {
       access = 'No'
     }
     htmlString += ` <tr class="c-row u-table o-layout__item o-layout--gutter-lg">
-        <td class="c-cell_second">${data.horses_horseID}</td>
-        <td class="c-cell_second">${data.date}</td>
-        <td class="c-cell_second">${data.distance} km</td>
+        <td class="c-cell_second">${data.naam}</td>
+        <td class="c-cell_second">${data.Datum}</td>
+        <td class="c-cell_second">${data.Afstand} km</td>
         
       </tr>`
   }
@@ -221,11 +222,29 @@ function toggleNav() {
       })
   }
 }
-function addhorse() {
-  console.log('in addhprse')
-  // console.log(naam, leeftijd)
-}
 
+//Event listner
+const listenToLockbuttons = function () {
+  const buttons = document.querySelectorAll('.js-lock');
+  for (const radiobutton of document.querySelectorAll('input[name="id"]')) {
+    radiobutton.addEventListener('click', function () {
+      if (radiobutton.checked) {
+        radioid = radiobutton.getAttribute('value')
+        console.log(radioid)
+      }
+    });
+  }
+  for (const b of buttons) {
+    b.addEventListener('click', function () {
+      const locktime = b.getAttribute('data-locktime')
+      console.log(`locktime: ${locktime}`)
+      // showSluiting(locktime,radioid)
+      // console.log(`time ${locktime} id ${radioid}`)
+      socketio.emit('F2B_locktime', locktime, radioid);
+    });
+  }
+
+};
 
 
 
