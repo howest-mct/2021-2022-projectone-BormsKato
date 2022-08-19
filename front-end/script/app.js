@@ -237,13 +237,11 @@ const init = function () {
   if (htmlhorse) {
     console.log('horses')
     gethorses()
-    // listenToShutdown()
     listenToSocket();
   }
   if (htmlhistory) {
     console.log('history')
     gethistory();
-    // listenToShutdown()
     listenToSocket()
     
   }
@@ -254,13 +252,7 @@ const init = function () {
     listenToSocket()
     listenToLightSocket()
     listenToTempSocket()
-    
-    // getldr()
-    // ShowLight()
-    // listenToLockbuttons()
-    // listenToTempSocket();
-    // listenToShutdown()
-    // showChart()
+  
     
   }
   if (htmltracking) {
