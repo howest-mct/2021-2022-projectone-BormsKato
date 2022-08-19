@@ -221,6 +221,9 @@ function toggleNav() {
       })
   }
 }
+function addhorse() {
+  document.getElementById("paard").innerHTML = "Hello World";
+}
 
 
 
@@ -266,6 +269,7 @@ const init = function () {
     listenToSocket()
     // settingLdr()
     getldrinput()
+    popup()
   }
 };
 
