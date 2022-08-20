@@ -6,7 +6,7 @@ const addEventListeners = function () {
   htmlLight.addEventListener('input', function () {
     checkValues();
   });
-  htmlMijnButton.addEventListener('click', ShowLight);
+  htmlMijnButton.addEventListener('click', ShowLightPercentage);
 };
 
 const checkValues = function () {
@@ -21,9 +21,10 @@ const checkValues = function () {
   }
 };
 
-const ShowLight = function () {
+const ShowLightPercentage = function () {
   const light = htmlLight.value;
   console.log(`Het ingestelde licht: ${light}`);
+  socket.emit('F2B_light', light)
 };
 
 

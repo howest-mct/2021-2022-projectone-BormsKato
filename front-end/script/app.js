@@ -46,7 +46,12 @@ const gethistory = function () {
   handleData(url, fill_table_history, error_get_history);
 };
 
-
+const gethorsename = function () {
+  // const url = lanIP + '/api/v1/horses/';
+  const url = backend + `/index/`
+  // console.log(url)
+  handleData(url, fill_dropdown_horses, error_get_horsename);
+};
 
 const fill_table_horses = function (jsonObject) {
   console.log(jsonObject)
@@ -89,6 +94,23 @@ const fill_table_history = function (jsonObject) {
 
 }
 
+
+const fill_dropdown_horses = function (jsonObject) {
+  console.log(jsonObject)
+  let htmlString = ''
+  let access = ''
+  for (let data of jsonObject) {
+    if (data.Toegang == 1) {
+      access = 'Yes'
+    } else {
+      access = 'No'
+    }
+    htmlString += ` <option value=${data.naam}>`
+  }
+  document.querySelector('.js-dropdownhorse').innerHTML = htmlString;
+
+}
+
 const error_get = function () {
   let htmlString = `  <td class="c-cell_second">Error</td>
                     <td class="c-cell_second">Error</td>
@@ -105,6 +127,12 @@ const error_get_history = function () {
 
 }
 
+const error_get_horsename = function () {
+  let htmlString = `option value= "error">  `;
+  document.querySelector('.js-dropdownhorse').innerHTML = htmlString
+
+}
+
 
 function sleep(milliseconds) {
   const date = Date.now();
@@ -115,10 +143,10 @@ function sleep(milliseconds) {
 }
 
 // // show
-// const ShowLight = function (light) {
-//   console.log('het lichht' + light)
-//   document.querySelector('.js-light').innerHTML = `<p class="c-light js-light">${light}%</p>`
-// }
+const ShowLight = function (light) {
+  console.log('het lichht' + light)
+  document.querySelector('.js-light').innerHTML = `<p class="c-light js-light">${light}%</p>`
+}
 
 const ShowTemp = function (temp) {
   console.log('De temperatuur' + temp)
@@ -247,6 +275,7 @@ const init = function () {
     listenToSocket()
     listenToLightSocket()
     listenToTempSocket()
+    gethorsename()
   
     
   }

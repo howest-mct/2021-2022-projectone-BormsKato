@@ -285,9 +285,9 @@ def read_history():
     return jsonify(result)
 
 @app.route(endpoint + '/index/', methods=['GET'])
-def read_ldr():
-    print('Get ldr')
-    result = DataRepository.read_ldr()
+def read_horsename():
+    print('Get horsename')
+    result = DataRepository.read_horsename()
     return jsonify(result)
 
 
@@ -300,6 +300,11 @@ def initial_connection():
 def shutter():
         print('Shutdown')
         Shutter()
+
+@socketio.on('F2B_light')
+def Lightpercentage(light):
+    print(f'ingestelde lichtsterkte: {light}')
+        
 
 
 
