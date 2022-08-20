@@ -19,6 +19,7 @@
     <script src="script/dataHandler.js"></script>
     <script src="script/app.js"></script>
     <script src="script/mobilenav.js"></script>
+    <script src="script/settings.js"></script>
 </head>
 
 
@@ -83,11 +84,17 @@
 
         <section class="o-row o-row--md u-max-width-md">
             <div class="o-container">
-                <form>
-                    <label>Lightpercentage <input type="text" id="lightpercentage" name="lightpercentage"></label>
-                    <button class="u-button" onclick="getlightuser()">Save</button>
-                    <p id="light"></p>
+                <form action="" method="POST">
+                    <div>
+                        <label for="light">Lightpercentage</label>
+                        <input type="number" name="light" id="light" class="js-lightuser" min="0" max="100" step="1"
+                            required placeholder="70" />
+                    </div>
+                    <div>
+                        <input type="button" class="u-button js-btnlight" value="Set light" />
+                    </div>
                 </form>
+
             </div>
         </section>
         <section class="o-row o-row--md u-max-width-md">

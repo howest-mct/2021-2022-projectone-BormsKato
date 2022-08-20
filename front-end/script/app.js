@@ -114,11 +114,11 @@ function sleep(milliseconds) {
   } while (currentDate - date < milliseconds);
 }
 
-// show
-const ShowLight = function (light) {
-  console.log('het lichht' + light)
-  document.querySelector('.js-light').innerHTML = `<p class="c-light js-light">${light}%</p>`
-}
+// // show
+// const ShowLight = function (light) {
+//   console.log('het lichht' + light)
+//   document.querySelector('.js-light').innerHTML = `<p class="c-light js-light">${light}%</p>`
+// }
 
 const ShowTemp = function (temp) {
   console.log('De temperatuur' + temp)
@@ -213,11 +213,11 @@ function shutdown() {
   document.getElementById("shutdown").innerHTML = text;
 }
 
-function getlightuser(){
-  console.log("lightlight")
-  text1 = ""
-  document.getElementById("light").innerHTML = text1;
-}
+// function getlightuser(){
+//   console.log("lightlight")
+//   text1 = ""
+//   document.getElementById("light").innerHTML = text1;
+// }
 
 const init = function () {
   
@@ -260,8 +260,7 @@ const init = function () {
     console.log("settings")
     listenToSocket()
     // settingLdr()
-    getlightuser()
-    shutdown()
+    // getlightuser()
   }
 };
 
