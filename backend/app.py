@@ -7,6 +7,8 @@ import threading
 import smbus
 from smbus import SMBus
 from subprocess import check_output
+from logging import shutdown
+import os
 
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, send
@@ -232,7 +234,21 @@ class MPU6050:
             values.append(byte)
         return values
 
-
+def Shutter():
+    # DeviceID=5
+    # ActieID=2
+    # Datum=datetime.now()
+    # Waarde=float(temperatuur)
+    # Commentaar='Shutdown'
+    # DataRepository.create_log(DeviceID,ActieID,Datum,Waarde,Commentaar)
+    lcd_string("Shutting Down",LCD_LINE_1)
+    lcd_string("Goodbye!",LCD_LINE_2)
+    time.sleep(2)
+    i2c.close()
+    GPIO.cleanup()
+    lcd_string("",LCD_LINE_1)
+    lcd_string("",LCD_LINE_2)
+    os.system("sudo shutdown -h now")
 
 # Code voor Flask
 
@@ -279,6 +295,12 @@ def read_ldr():
 @socketio.on('connect')
 def initial_connection():
     print('A new client connected')
+
+@socketio.on('F2B_shutdown')
+def shutter():
+        print('Shutdown')
+        Shutter()
+
 
 
 

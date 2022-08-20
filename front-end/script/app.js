@@ -223,30 +223,19 @@ function toggleNav() {
   }
 }
 
-//Event listner
-const listenToLockbuttons = function () {
-  const buttons = document.querySelectorAll('.js-lock');
-  for (const radiobutton of document.querySelectorAll('input[name="id"]')) {
-    radiobutton.addEventListener('click', function () {
-      if (radiobutton.checked) {
-        radioid = radiobutton.getAttribute('value')
-        console.log(radioid)
-      }
-    });
+
+
+function shutdown() {
+  let text = "Are you sure you want to shutdown the device?";
+  if (confirm(text) == true) {
+    console.log('Shutdown 😒')
+    socket.emit('F2B_shutdown');
+  } else {
+    console.log("cancel")
+    text = "You canceled!";
   }
-  for (const b of buttons) {
-    b.addEventListener('click', function () {
-      const locktime = b.getAttribute('data-locktime')
-      console.log(`locktime: ${locktime}`)
-      // showSluiting(locktime,radioid)
-      // console.log(`time ${locktime} id ${radioid}`)
-      socketio.emit('F2B_locktime', locktime, radioid);
-    });
-  }
-
-};
-
-
+  document.getElementById("shutdown").innerHTML = text;
+}
 
 const init = function () {
   
@@ -290,7 +279,7 @@ const init = function () {
     listenToSocket()
     // settingLdr()
     getldrinput()
-    popup()
+    shutdown()
   }
 };
 
