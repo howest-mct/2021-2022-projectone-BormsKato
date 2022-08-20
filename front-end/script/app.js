@@ -105,7 +105,7 @@ const fill_dropdown_horses = function (jsonObject) {
     } else {
       access = 'No'
     }
-    htmlString += ` <option value=${data.naam}>`
+    htmlString += ` <datalist id="paarden"> <option value="${data.naam}"> </datalist>`
   }
   document.querySelector('.js-dropdownhorse').innerHTML = htmlString;
 
@@ -128,7 +128,7 @@ const error_get_history = function () {
 }
 
 const error_get_horsename = function () {
-  let htmlString = `option value= "error">  `;
+  let htmlString = ` <datalist id="paarden"> <option value="error"> </datalist>`;
   document.querySelector('.js-dropdownhorse').innerHTML = htmlString
 
 }
@@ -282,8 +282,6 @@ const init = function () {
   if (htmlsettings){
     console.log("settings")
     listenToSocket()
-    // settingLdr()
-    // getlightuser()
   }
 };
 
