@@ -47,30 +47,6 @@ const gethistory = function () {
 };
 
 
-const getldrinput = function () {
-  const url = backend + `/settings.html?lightpercentage=`+ {waarde};
-  console.log(url)
-//   handleData(url, fill_table_alc, error_get);
-//   for (const radiobutton of document.querySelectorAll('input[name="id"]')) {
-//     radiobutton.addEventListener('click', function () {
-//       if (radiobutton.checked) {
-//         radioid = radiobutton.getAttribute('value')
-//         // console.log(radioid)
-//         if (radioid != '0') {
-//           const url = lanIP + `/api/v1/alchistory/${radioid}/`;
-//           console.log(url)
-//           handleData(url, fill_table_alc, error_get);
-//         } else if (radioid == '0') {
-//           const url = lanIP + `/api/v1/alchistory/`;
-//           console.log(url)
-//           handleData(url, fill_table_alc, error_get);
-
-//         }
-
-//       }
-//     });
-  }
-// };
 
 const fill_table_horses = function (jsonObject) {
   console.log(jsonObject)
@@ -232,9 +208,15 @@ function shutdown() {
     socket.emit('F2B_shutdown');
   } else {
     console.log("cancel")
-    text = "You canceled!";
+    text = "";
   }
   document.getElementById("shutdown").innerHTML = text;
+}
+
+function getlightuser(){
+  console.log("lightlight")
+  text1 = ""
+  document.getElementById("light").innerHTML = text1;
 }
 
 const init = function () {
@@ -278,7 +260,7 @@ const init = function () {
     console.log("settings")
     listenToSocket()
     // settingLdr()
-    getldrinput()
+    getlightuser()
     shutdown()
   }
 };

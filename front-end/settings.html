@@ -85,12 +85,16 @@
             <div class="o-container">
                 <form>
                     <label>Lightpercentage <input type="text" id="lightpercentage" name="lightpercentage"></label>
-                    <button type="submit">Save</button>
+                    <button class="u-button" onclick="getlightuser()">Save</button>
+                    <p id="light"></p>
                 </form>
             </div>
         </section>
-        <button class="u-button" onclick="shutdown()">Shutdown</button>
-        <p id="shutdown"></p>
+        <section class="o-row o-row--md u-max-width-md">
+            <button class="u-button" onclick="shutdown()">Shutdown</button>
+            <p id="shutdown"></p>
+        </section>
+
 
         <aside class="c-mobile-nav">
             <div class="c-mobile-nav__bg"></div>
