@@ -241,12 +241,6 @@ function shutdown() {
   document.getElementById("shutdown").innerHTML = text;
 }
 
-// function getlightuser(){
-//   console.log("lightlight")
-//   text1 = ""
-//   document.getElementById("light").innerHTML = text1;
-// }
-
 const init = function () {
   
   const htmlhome = document.querySelector('.js-light')

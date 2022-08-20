@@ -28,6 +28,8 @@ btnPinR = Button(20)
 ledPinL = 24
 btnPinL = Button(23)
 
+inputwaardeldr = 70
+
 klasseMCP = MCPclass()
 ledPinV = 16
 
@@ -75,7 +77,9 @@ def ldr():
         print(ldrdata)
         waardeldr = 100 - (ldrdata/1023 *100)
         print(waardeldr)
-        if waardeldr < 80:
+        global inputwaardeldr
+        print(f'Input ldr ingesteld = {inputwaardeldr}')
+        if waardeldr < inputwaardeldr:
             GPIO.output(ledPinV, 1)
         else:
             GPIO.output(ledPinV, 0)
@@ -303,7 +307,9 @@ def shutter():
 
 @socketio.on('F2B_light')
 def Lightpercentage(light):
+    global inputwaardeldr
     print(f'ingestelde lichtsterkte: {light}')
+    inputwaardeldr = int(light)
         
 
 
