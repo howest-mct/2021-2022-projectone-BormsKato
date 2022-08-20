@@ -14,7 +14,6 @@
     <script src="script/app.js"></script>
     <script src="script/mobilenav.js"></script>
     <script src="script/horses.js"></script>
-    <script src="script/tabel.js"></script>
 </head>
 
 <body class="u-max-width-page ">
@@ -95,7 +94,7 @@
     <section class="o-row o-row--md u-max-width-page">
         <div class="c-container">
             <div class="o-section o-section-lg">
-                <form action="" method="POST">
+                <!-- <form action="" method="POST">
                     <div>
                         <label for="naam">Naam van je paard</label>
                         <input type="text" name="naam" id="naam" class="js-naam" />
@@ -106,7 +105,21 @@
                             step="1" />
                     </div>
                     <div>
-                        <button id="paard" class="paard">Voeg nieuw paard toe</button>
+                        <button id="paard" class="paard js-btnnewhorse">Voeg nieuw paard toe</button>
+                    </div>
+                </form> -->
+                <form action="" method="POST">
+                    <div>
+                        <label for="naam">Name from the horse</label>
+                        <input type="text" name="naam" id="naam" class="js-naam" required placeholder="name" />
+                    </div>
+                    <div>
+                        <label for="leeftijd">Age (in years)</label>
+                        <input type="number" name="leeftijd" id="leeftijd" class="js-leeftijd" min="0" max="40" step="1"
+                            required placeholder="age" />
+                    </div>
+                    <div>
+                        <input type="button" class="u-button js-btnnewhorse" value="Add new horse" />
                     </div>
                 </form>
             </div>

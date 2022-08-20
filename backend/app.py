@@ -310,6 +310,11 @@ def Lightpercentage(light):
     global inputwaardeldr
     print(f'ingestelde lichtsterkte: {light}')
     inputwaardeldr = int(light)
+
+@socketio.on('F2B_newhorse')
+def newhorse(naam, leeftijd):
+    print(f'nieuw paard: {naam} {leeftijd}')
+    DataRepository.add_horse(naam, leeftijd)
         
 
 
