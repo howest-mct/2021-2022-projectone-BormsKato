@@ -242,11 +242,12 @@ function shutdown() {
 
 const ShowLat = function(latitude, longitude){
   console.log("in showlat")
-  const arr_latlong = (latitude +' '+ longitude)
+  const arr_latlong = (latitude +","+ longitude)
+  const arr_coords = arr_latlong.split(',');
   console.log(arr_latlong)
   console.log(latitude )
   console.log(longitude)
-  let marker = L.marker( arr_latlong).addTo(layergroup);
+  let marker = L.marker( arr_coords).addTo(layergroup);
   // layergroup = L.layerGroup().addTo(map);
   marker.bindPopup(`ok`);
   
