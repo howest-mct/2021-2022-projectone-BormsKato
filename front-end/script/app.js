@@ -292,12 +292,14 @@ const init = function () {
   }
   if (htmlhome) {
     console.log('licht')
-    map = L.map('map').setView([51.041028, 3.398512], 10);
+    map = L.map('map').setView([50.84, 3.30], 15);
     L.tileLayer(provider, { attribution: copyright }).addTo(map);
     listenToSocket()
     listenToLightSocket()
     listenToTempSocket()
     gethorsename()  
+    listenToLatSocket()
+    layergroup = L.layerGroup().addTo(map);
   }
   if (htmltracking) {
     console.log("tracking")
