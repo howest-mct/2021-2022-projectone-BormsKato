@@ -116,9 +116,8 @@ const error_get = function () {
                     <td class="c-cell_second">Error</td>
                     <td class="c-cell_second">Error</td>`;
   document.querySelector('.js-table-horses').innerHTML = htmlString
-  document.querySelector('.js-table-history').innerHTML = htmlString
-
 }
+
 const error_get_history = function () {
   let htmlString = `  <td class="c-cell_second">Error</td>
                     <td class="c-cell_second">Error</td>
@@ -128,7 +127,7 @@ const error_get_history = function () {
 }
 
 const error_get_horsename = function () {
-  let htmlString = `<option value="error">`;
+  let htmlString = `<option> Error</option>`;
   document.querySelector('.js-dropdownhorse').innerHTML = htmlString
 
 }
