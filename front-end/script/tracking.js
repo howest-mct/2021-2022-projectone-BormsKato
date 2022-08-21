@@ -1,34 +1,32 @@
 'use strict';
-const ShowLat = function(parameter){
+const ShowLat = function(latitude, longitude){
     console.log("in showlat")
-    // map = L.map('map').setView([latitude, longitude], 10);
-    // L.tileLayer(provider, { attribution: copyright }).addTo(map);
-    console.log(parameter)
+    // let marker = L.marker( ).addTo(layergroup);
+    const arr_latlong = (latitude +' '+ longitude)
+    console.log(arr_latlong)
+    console.log(latitude )
+    console.log(longitude)
   }
+
+const maakMarker = function (coords, adres, campusnaam) {
+    //console.log(coords);
+    const arr_coords = coords.split(',');
+    layergroup.clearLayers();
+    let marker = L.marker(arr_coords).addTo(layergroup);
+    marker.bindPopup(`<h3>${campusnaam}</h3><em>${adres}</em>`);
+};
 const listenToLatSocket = function () {
-// Get lat by connect
+// Get gps by connect
 socket.on('B2F_connected', function (parameter) {
-    console.log(`lat ${parameter.latitudeWaarde} `);
+    console.log(`lat ${parameter.latitudeWaarde}, long ${parameter.longitudeWaarde}`);
     latitude = parameter.latitudeWaarde
-    ShowLat(parameter.latitudeWaarde)
-});
-// To get latitude by thread
-socket.on('Latdata', function (parameter) {
-    console.log(`lat ${parameter.latitudeWaarde}`);
-    latitude = parameter.latitudeWaarde
-    ShowLat(parameter.latitudeWaarde)
-});
-// Get long by connect
-socket.on('B2F_connected', function (parameter) {
-    console.log(`long ${parameter.longitudeWaarde} `);
     longitude = parameter.longitudeWaarde
-    ShowLat(parameter.longitudeWaarde)
+    ShowLat(parameter.latitudeWaarde,parameter.longitudeWaarde)
 });
 // To get long by thread
-socket.on('Longdata', function (parameter) {
-    console.log(`long ${parameter.longitudeWaarde}`);
-    longitude = parameter.longitudeWaarde
-    ShowLat(parameter.longitudeWaarde)
+socket.on('gpsdata', function (parameter) {
+    console.log(`lat ${parameter.latitudeWaarde}, long ${parameter.longitudeWaarde}`);
+    ShowLat(parameter.latitudeWaarde,parameter.longitudeWaarde)
 });
 }
 
