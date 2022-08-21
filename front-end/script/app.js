@@ -240,6 +240,35 @@ function shutdown() {
   document.getElementById("shutdown").innerHTML = text;
 }
 
+const ShowLat = function(latitude, longitude){
+  console.log("in showlat")
+  const arr_latlong = (latitude +' '+ longitude)
+  console.log(arr_latlong)
+  console.log(latitude )
+  console.log(longitude)
+  let marker = L.marker( arr_latlong).addTo(layergroup);
+  // layergroup = L.layerGroup().addTo(map);
+  marker.bindPopup(`ok`);
+  
+  
+}
+const listenToLatSocket = function () {
+// Get gps by connect
+socket.on('B2F_connected', function (parameter) {
+  console.log(`lat ${parameter.latitudeWaarde}, long ${parameter.longitudeWaarde}`);
+  latitude = parameter.latitudeWaarde
+  longitude = parameter.longitudeWaarde
+  ShowLat(parameter.latitudeWaarde,parameter.longitudeWaarde)
+});
+// To get gps by thread
+socket.on('gpsdata', function (parameter) {
+  console.log(`lat ${parameter.latitudeWaarde}, long ${parameter.longitudeWaarde}`);
+  ShowLat(parameter.latitudeWaarde,parameter.longitudeWaarde)
+});
+}
+
+
+
 const init = function () {
   
   const htmlhome = document.querySelector('.js-light')
@@ -275,6 +304,7 @@ const init = function () {
     L.tileLayer(provider, { attribution: copyright }).addTo(map);
     listenToSocket()
     listenToLatSocket()
+    layergroup = L.layerGroup().addTo(map);
   }
   if (htmlsettings){
     console.log("settings")
