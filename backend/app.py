@@ -101,14 +101,12 @@ def gps():
             Mlat = latitude[2:4]
             Slat =latitude[5:7]
             latitudeWaarde = int(Dlat) + (int(Mlat)/60) + (int(Slat)/3600)
-            # socketio.emit('Latdata', {'latitudeWaarde': f'{latitudeWaarde}'})
             print(latitudeWaarde)
             longitude= properdata[33:42]
             Dlong= longitude[0:1]
             Mlong = longitude[1:3]
             Slong =longitude[4:6]
             longitudeWaarde = int(Dlong) + (int(Mlong)/60) + (int(Slong)/3600)
-            # socketio.emit('Longdata', {'longitudeWaarde': f'{longitudeWaarde}'})
             socketio.emit('gpsdata', {'latitudeWaarde': f'{latitudeWaarde}','longitudeWaarde': f'{longitudeWaarde}'})
             print(longitudeWaarde)
 
