@@ -37,6 +37,9 @@ ledPinV = 16
 i2c = SMBus()  
 i2c.open(1) 
 
+vorigelatitude = 0.0
+vorigelongitude = 0.0
+
 port="/dev/ttyS0"
 
 # Code voor Hardware
@@ -84,9 +87,9 @@ def ldr():
             GPIO.output(ledPinV, 1)
         else:
             GPIO.output(ledPinV, 0)
-        DataRepository.create_log_meethistoriek(4,1,datetime.now(),waardeldr, "ldr meting")
+        # DataRepository.create_log_meethistoriek(4,1,datetime.now(),waardeldr, "ldr meting")
         socketio.emit('LightData', {'light': f'{ "%.0f" % waardeldr}'})
-        time.sleep(5)
+        time.sleep(20)
         
 def gps():
     while True:
@@ -96,21 +99,33 @@ def gps():
         properdata = newdata.decode('utf-8').replace('b','').replace('$','').replace('\r','').replace('\n','')
 
         if properdata[0:5] == "GNRMC":
+            global vorigelatitude, vorigelongitude
             print(properdata)
             latitude= properdata[18:28]
             Dlat= latitude[0:2]
             Mlat = latitude[2:4]
-            Slat =latitude[5:7]
-            latitudeWaarde = int(Dlat) + (int(Mlat)/60) + (int(Slat)/3600)
+            Slat =latitude[5:10]
+            print(Slat)
+            Slatproper = Slat[0:2] + "." + Slat[2:7]
+            print(Slatproper)
+            latitudeWaarde = float(Dlat) + (float(Mlat)/60) + (float(Slatproper)/3600)
             print(latitudeWaarde)
             longitude= properdata[33:42]
             Dlong= longitude[0:1]
             Mlong = longitude[1:3]
-            Slong =longitude[4:6]
-            longitudeWaarde = int(Dlong) + (int(Mlong)/60) + (int(Slong)/3600)
-            socketio.emit('gpsdata', {'latitudeWaarde': f'{latitudeWaarde}','longitudeWaarde': f'{longitudeWaarde}'})
+            Slong =longitude[4:9]
+            Slongproper = Slong[0:2] + "." + Slong[2:7]
+            longitudeWaarde = float(Dlong) + (float(Mlong)/60) + (float(Slongproper)/3600)
+            print("latitude vorig" + str(vorigelatitude))
+            print("latitude nieuw" + str(latitudeWaarde))
+            if latitudeWaarde != vorigelatitude and longitudeWaarde != vorigelongitude:
+                socketio.emit('gpsdata', {'latitudeWaarde': f'{latitudeWaarde}','longitudeWaarde': f'{longitudeWaarde}'})
             print(longitudeWaarde)
-            DataRepository.create_log_meethistoriek(2,3,datetime.now(),{latitudeWaarde}+{longitudeWaarde}, "gps meting")
+            str_gps = str(latitudeWaarde) + str(longitudeWaarde)
+            # DataRepository.create_log_meethistoriek(2,3,datetime.now(),str_gps, "gps meting")
+            vorigelatitude = latitudeWaarde
+            vorigelongitude = longitudeWaarde
+            time.sleep(1)
 
 #LCD
 
@@ -195,20 +210,20 @@ class MPU6050:
             print("***")
             print('De temperatuur is {}°C'.format(self.read_temp()))
             temp = self.read_temp()
-            DataRepository.create_log_meethistoriek(3,2,datetime.now(),temp, "temp meting")
+            # DataRepository.create_log_meethistoriek(3,2,datetime.now(),temp, "temp meting")
             socketio.emit('TempData', {'temp': f'{ "%.0f" % temp}'})
             accel = self.read_accel()
             str_accel = str(accel)
-            DataRepository.create_log_meethistoriek(6,5,datetime.now(),str_accel, "accel meting")
+            # DataRepository.create_log_meethistoriek(6,5,datetime.now(),str_accel, "accel meting")
             print('Accel: x = {0}, y = {1}, z = {2}'.format(
                 accel[0], accel[1], accel[2]))
             gyro = self.read_gyro()
             str_gyro = str(gyro)
-            DataRepository.create_log_meethistoriek(5,4,datetime.now(),str_gyro, "gyro meting")
+            # DataRepository.create_log_meethistoriek(5,4,datetime.now(),str_gyro, "gyro meting")
             print('Gyro : x = {0}°/s, y = {1}°/s, z = {2}°/s'.format(
                 gyro[0], gyro[1], gyro[2]))
             print()
-            time.sleep(3)
+            time.sleep(10)
 
     @staticmethod
     def combine_bytes(msb, lsb):

@@ -8,50 +8,18 @@ const copyright =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>';
 
 let map, layergroup;
-
-// const maakMarker = function (coords, adres, campusnaam) {
-//   //console.log(coords);
-//   const arr_coords = coords.split(',');
-//   layergroup.clearLayers();
-//   let marker = L.marker(arr_coords).addTo(layergroup);
-//   marker.bindPopup(`<h3>${campusnaam}</h3><em>${adres}</em>`);
-// };
-
-// const printData = function(data){
-//   console.log(data)
-// }
-
-
-// const init = function () {
-//   console.log('init initiated!');
-
-  // map = L.map('map').setView([51.041028, 3.398512], 10);
-  // L.tileLayer(provider, { attribution: copyright }).addTo(map);
-
-
-// };
+let htmlhome 
 
 
 const gethorses = function () {
-  // const url = lanIP + '/api/v1/horses/';
   const url = backend + `/horses/`
-  // console.log(url)
   handleData(url, fill_table_horses, error_get);
 };
 
 const gethistory = function () {
-  // const url = lanIP + '/api/v1/horses/';
   const url = backend + `/latestroutes/`
-  // console.log(url)
   handleData(url, fill_table_history, error_get_history);
 };
-
-// const gethorsename = function () {
-//   // const url = lanIP + '/api/v1/horses/';
-//   const url = backend + `/index/`
-//   // console.log(url)
-//   handleData(url, fill_dropdown_horses, error_get_horsename);
-// };
 
 const fill_table_horses = function (jsonObject) {
   console.log(jsonObject)
@@ -93,39 +61,6 @@ const fill_table_history = function (jsonObject) {
   document.querySelector('.js-table-history').innerHTML = htmlString;
 
 }
-
-
-// const fill_dropdown_horses = function (jsonObject) {
-//   console.log(jsonObject)
-//   htmlStartbtn = document.querySelector('.js-startbtn')
-//   htmlStartbtn.disabled = true;
-//   let htmlString = ''
-//   let access = ''
-//   htmlString += `<option value="0">Choose your horse</option>`
-//   for (let data of jsonObject) {
-//     if (data.Toegang == 1) {
-//       access = 'Yes'
-//     } else {
-//       access = 'No'
-//     }
-//     htmlString += `<option value="${data.HorseId}">${data.naam}</option>`
-//   }
-//   document.querySelector('.js-dropdownhorse').innerHTML = htmlString;
-
-// }
-// function selectNum(){
-//   var strUser = document.getElementById("dropdownhorse").value;
-//   console.log('value' + strUser)
-//   htmlStartbtn = document.querySelector('.js-startbtn')
-//   if (
-//     strUser != 0 
-//   ) {
-//     htmlStartbtn.disabled = false;
-//   } else {
-//     htmlStartbtn.disabled = true;
-//   }
-// }
-
 
 const error_get = function () {
   let htmlString = `  <td class="c-cell_second">Error</td>
@@ -258,12 +193,17 @@ function shutdown() {
 }
 
 const ShowLat = function(latitude, longitude){
+  const htmlhome = document.querySelector('.js-light')
   console.log("in showlat")
   const arr_latlong = (latitude +","+ longitude)
   const arr_coords = arr_latlong.split(',');
   console.log(arr_latlong)
   console.log(latitude )
   console.log(longitude)
+  if (htmlhome){
+    layergroup.clearLayers();
+  }
+    
   let marker = L.marker( arr_coords).addTo(layergroup);
   // layergroup = L.layerGroup().addTo(map);
   marker.bindPopup(`ok`);
