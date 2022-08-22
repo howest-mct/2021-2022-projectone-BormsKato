@@ -317,8 +317,6 @@ const init = function () {
     gethorsename()  
     listenToLatSocket()
     layergroup = L.layerGroup().addTo(map);
-    // var selectedValue = document.getElementById("dropdownhorse").value;
-    // console.log('geselecteerde value is '+ {selectedValue})
   }
   if (htmltracking) {
     console.log("tracking")

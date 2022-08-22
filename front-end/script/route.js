@@ -3,12 +3,18 @@
 let htmlStartbtn;
 
 const addEventListeners = function () {
-  
   htmlStartbtn.addEventListener('click', StartRoute);
+  console.log('blablabla')
 };
 
 const StartRoute = function(){
+    window.location.href = "tracking.html"
     console.log("start route")
+    var start = Date.now()
+    console.time("timer");   //start time with name = timer
+    console.log(start)
+    console.timeEnd("timer")
+    
 }
 
 const gethorsename = function () {
@@ -61,10 +67,13 @@ const init3 = function () {
   console.info('DOM geladen');
   //ik mag mijn variabele pas een waarde geven al de DOMcontentloaded gebeurd is
   htmlStartbtn = document.querySelector('.js-startbtn');
+  const htmlhome = document.querySelector('.js-light')
+//   htmlStopbtn = document.querySelector('.js-stopbtn')
   //plaats de knop inactief
-  htmlStartbtn.disabled = true;
+//   htmlStartbtn.disabled = true;
   //luisteren naar mijn eventListeners
-  addEventListeners();
+  if (htmlhome)
+    addEventListeners();
 };
 
 document.addEventListener('DOMContentLoaded', init3);
