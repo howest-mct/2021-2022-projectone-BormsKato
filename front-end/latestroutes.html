@@ -13,6 +13,7 @@
     <script src="script/dataHandler.js"></script>
     <script src="script/app.js"></script>
     <script src="script/mobilenav.js"></script>
+    <script src="script/historiek.js"></script>
 </head>
 
 <body class="u-max-width-page ">
@@ -64,11 +65,11 @@
                         <div class="o-layout__item">
                             <h3 id="Latest Routes" class="u-color--dark">Latest Routes</h3>
                             <div>
-                                <select class="js-dropdownhorse">
-                                    <option>Data</option>
-                                    <option>Data</option>
-                                    <option>Data</option>
-                                    <option>Data</option>
+                                <select id="dropdownhistoriek" class="js-dropdownhistoriek" onchange="selectNum()">
+                                    <option value="1">Data</option>
+                                    <option value="2">Data</option>
+                                    <option value="3">Data</option>
+                                    <option value="4">Data</option>
                                 </select>
 
                             </div>

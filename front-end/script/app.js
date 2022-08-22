@@ -245,6 +245,7 @@ const init = function () {
     console.log('history')
     gethistory();
     listenToSocket()
+    gethorsenamehistoriek()
     
   }
   if (htmlhome) {

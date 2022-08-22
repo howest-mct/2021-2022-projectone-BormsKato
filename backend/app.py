@@ -116,8 +116,6 @@ def gps():
             Slong =longitude[4:9]
             Slongproper = Slong[0:2] + "." + Slong[2:7]
             longitudeWaarde = float(Dlong) + (float(Mlong)/60) + (float(Slongproper)/3600)
-            print("latitude vorig" + str(vorigelatitude))
-            print("latitude nieuw" + str(latitudeWaarde))
             if latitudeWaarde != vorigelatitude and longitudeWaarde != vorigelongitude:
                 socketio.emit('gpsdata', {'latitudeWaarde': f'{latitudeWaarde}','longitudeWaarde': f'{longitudeWaarde}'})
             print(longitudeWaarde)
