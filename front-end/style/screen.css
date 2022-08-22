@@ -280,6 +280,10 @@ span:last-child {
   }
 }
 
+.invertwhite {
+  filter: invert(100%) sepia(1%) saturate(7495%) hue-rotate(269deg) brightness(102%) contrast(100%);
+}
+
 /*------------------------------------*\
 #OBJECTS
 \*------------------------------------*/
