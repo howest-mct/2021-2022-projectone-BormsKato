@@ -105,10 +105,14 @@ const fill_dropdown_horses = function (jsonObject) {
     } else {
       access = 'No'
     }
-    htmlString += `<option>${data.naam}</option>`
+    htmlString += `<option value="${data.HorseId}">${data.naam}</option>`
   }
   document.querySelector('.js-dropdownhorse').innerHTML = htmlString;
 
+}
+function selectNum(){
+  var strUser = document.getElementById("dropdownhorse").value;
+  console.log('value' + strUser)
 }
 
 const error_get = function () {
@@ -300,6 +304,8 @@ const init = function () {
     gethorsename()  
     listenToLatSocket()
     layergroup = L.layerGroup().addTo(map);
+    // var selectedValue = document.getElementById("dropdownhorse").value;
+    // console.log('geselecteerde value is '+ {selectedValue})
   }
   if (htmltracking) {
     console.log("tracking")

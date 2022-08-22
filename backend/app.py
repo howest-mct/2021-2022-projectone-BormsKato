@@ -9,6 +9,7 @@ from smbus import SMBus
 from subprocess import check_output
 from logging import shutdown
 import os
+from datetime import datetime
 
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, send
@@ -83,7 +84,7 @@ def ldr():
             GPIO.output(ledPinV, 1)
         else:
             GPIO.output(ledPinV, 0)
-        DataRepository.create_log_ldr(waardeldr)
+        DataRepository.create_log_meethistoriek(4,1,datetime.now(),waardeldr, "ldr meting")
         socketio.emit('LightData', {'light': f'{ "%.0f" % waardeldr}'})
         time.sleep(5)
         
@@ -109,6 +110,7 @@ def gps():
             longitudeWaarde = int(Dlong) + (int(Mlong)/60) + (int(Slong)/3600)
             socketio.emit('gpsdata', {'latitudeWaarde': f'{latitudeWaarde}','longitudeWaarde': f'{longitudeWaarde}'})
             print(longitudeWaarde)
+            DataRepository.create_log_meethistoriek(2,3,datetime.now(),{latitudeWaarde}+{longitudeWaarde}, "gps meting")
 
 #LCD
 
@@ -193,15 +195,20 @@ class MPU6050:
             print("***")
             print('De temperatuur is {}°C'.format(self.read_temp()))
             temp = self.read_temp()
+            DataRepository.create_log_meethistoriek(3,2,datetime.now(),temp, "temp meting")
             socketio.emit('TempData', {'temp': f'{ "%.0f" % temp}'})
             accel = self.read_accel()
+            str_accel = str(accel)
+            DataRepository.create_log_meethistoriek(6,5,datetime.now(),str_accel, "accel meting")
             print('Accel: x = {0}, y = {1}, z = {2}'.format(
                 accel[0], accel[1], accel[2]))
             gyro = self.read_gyro()
+            str_gyro = str(gyro)
+            DataRepository.create_log_meethistoriek(5,4,datetime.now(),str_gyro, "gyro meting")
             print('Gyro : x = {0}°/s, y = {1}°/s, z = {2}°/s'.format(
                 gyro[0], gyro[1], gyro[2]))
             print()
-            time.sleep(1)
+            time.sleep(3)
 
     @staticmethod
     def combine_bytes(msb, lsb):

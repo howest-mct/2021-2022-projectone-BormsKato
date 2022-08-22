@@ -29,6 +29,7 @@ const ShowNewHorse = function () {
   const leeftijd = htmlLeeftijd.value;
   console.log(`Het nieuw toegevoegde paard: ${naam} ${leeftijd}`);
   socket.emit('F2B_newhorse', naam, leeftijd)
+  gethorses()
 };
 
 
