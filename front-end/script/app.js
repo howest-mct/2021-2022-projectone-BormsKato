@@ -46,12 +46,12 @@ const gethistory = function () {
   handleData(url, fill_table_history, error_get_history);
 };
 
-const gethorsename = function () {
-  // const url = lanIP + '/api/v1/horses/';
-  const url = backend + `/index/`
-  // console.log(url)
-  handleData(url, fill_dropdown_horses, error_get_horsename);
-};
+// const gethorsename = function () {
+//   // const url = lanIP + '/api/v1/horses/';
+//   const url = backend + `/index/`
+//   // console.log(url)
+//   handleData(url, fill_dropdown_horses, error_get_horsename);
+// };
 
 const fill_table_horses = function (jsonObject) {
   console.log(jsonObject)
@@ -95,25 +95,37 @@ const fill_table_history = function (jsonObject) {
 }
 
 
-const fill_dropdown_horses = function (jsonObject) {
-  console.log(jsonObject)
-  let htmlString = ''
-  let access = ''
-  for (let data of jsonObject) {
-    if (data.Toegang == 1) {
-      access = 'Yes'
-    } else {
-      access = 'No'
-    }
-    htmlString += `<option value="${data.HorseId}">${data.naam}</option>`
-  }
-  document.querySelector('.js-dropdownhorse').innerHTML = htmlString;
+// const fill_dropdown_horses = function (jsonObject) {
+//   console.log(jsonObject)
+//   htmlStartbtn = document.querySelector('.js-startbtn')
+//   htmlStartbtn.disabled = true;
+//   let htmlString = ''
+//   let access = ''
+//   htmlString += `<option value="0">Choose your horse</option>`
+//   for (let data of jsonObject) {
+//     if (data.Toegang == 1) {
+//       access = 'Yes'
+//     } else {
+//       access = 'No'
+//     }
+//     htmlString += `<option value="${data.HorseId}">${data.naam}</option>`
+//   }
+//   document.querySelector('.js-dropdownhorse').innerHTML = htmlString;
 
-}
-function selectNum(){
-  var strUser = document.getElementById("dropdownhorse").value;
-  console.log('value' + strUser)
-}
+// }
+// function selectNum(){
+//   var strUser = document.getElementById("dropdownhorse").value;
+//   console.log('value' + strUser)
+//   htmlStartbtn = document.querySelector('.js-startbtn')
+//   if (
+//     strUser != 0 
+//   ) {
+//     htmlStartbtn.disabled = false;
+//   } else {
+//     htmlStartbtn.disabled = true;
+//   }
+// }
+
 
 const error_get = function () {
   let htmlString = `  <td class="c-cell_second">Error</td>
@@ -130,11 +142,11 @@ const error_get_history = function () {
 
 }
 
-const error_get_horsename = function () {
-  let htmlString = `<option> Error</option>`;
-  document.querySelector('.js-dropdownhorse').innerHTML = htmlString
+// const error_get_horsename = function () {
+//   let htmlString = `<option> Error</option>`;
+//   document.querySelector('.js-dropdownhorse').innerHTML = htmlString
 
-}
+// }
 
 
 function sleep(milliseconds) {
@@ -236,6 +248,7 @@ function shutdown() {
   let text = "Are you sure you want to shutdown the device?";
   if (confirm(text) == true) {
     console.log('Shutdown 😒')
+    text = "";
     socket.emit('F2B_shutdown');
   } else {
     console.log("cancel")
