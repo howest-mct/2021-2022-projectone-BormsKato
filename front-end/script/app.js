@@ -82,16 +82,7 @@ const deleteRow = function(paard){
   console.log("deleteknop")
   console.log(paard)
   socket.emit('F2B_deletehorse', paard)
-  
 }
-
-
-
-// const error_get_horsename = function () {
-//   let htmlString = `<option> Error</option>`;
-//   document.querySelector('.js-dropdownhorse').innerHTML = htmlString
-
-// }
 
 
 function sleep(milliseconds) {

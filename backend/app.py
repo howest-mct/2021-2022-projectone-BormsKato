@@ -352,6 +352,11 @@ def newhorse(naam, leeftijd):
 def dropdownhistoriek(id):
     global globalid
     globalid = id
+
+@socketio.on('F2B_deletehorse')
+def deletehorse(paard):
+    print(f"verwijderd paard: {paard}")
+    DataRepository.delete_horse(paard)
         
 
 

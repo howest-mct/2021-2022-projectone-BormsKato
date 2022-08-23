@@ -48,6 +48,11 @@ class DataRepository:
         params = [naam, leeftijd]
         return Database.execute_sql(sql, params)
 
+    @staticmethod
+    def delete_horse(id):
+        sql="UPDATE horses SET deleted = 1 WHERE HorseId = %s;"
+        params = [id]
+        return Database.execute_sql(sql,params)
 
     @staticmethod
     def read_history():
