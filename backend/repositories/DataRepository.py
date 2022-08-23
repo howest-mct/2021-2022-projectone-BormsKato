@@ -34,12 +34,12 @@ class DataRepository:
     #     return Database.execute_sql(sql, params)
     @staticmethod
     def read_horses():
-        sql="SELECT * FROM horses "
+        sql="SELECT * FROM horses WHERE deleted IS NULL"
         return Database.get_rows(sql)
 
     @staticmethod
     def read_horsename():
-        sql="SELECT HorseId, naam FROM horses "
+        sql="SELECT HorseId, naam FROM horses WHERE deleted IS NULL"
         return Database.get_rows(sql)
 
     @staticmethod

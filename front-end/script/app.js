@@ -35,6 +35,7 @@ const fill_table_horses = function (jsonObject) {
         <td class="c-cell_second">${data.HorseId}</td>
         <td class="c-cell_second">${data.naam}</td>
         <td class="c-cell_second">${data.leeftijd}</td>
+        <td><input type="button" value="Delete" onclick="deleteRow(${data.HorseId})"></td>
       </tr>`
   }
   document.querySelector('.js-table-horses').innerHTML = htmlString;
@@ -76,6 +77,15 @@ const error_get_history = function () {
   document.querySelector('.js-table-history').innerHTML = htmlString
 
 }
+
+const deleteRow = function(paard){
+  console.log("deleteknop")
+  console.log(paard)
+  socket.emit('F2B_deletehorse', paard)
+  
+}
+
+
 
 // const error_get_horsename = function () {
 //   let htmlString = `<option> Error</option>`;
@@ -237,6 +247,7 @@ const init = function () {
 
 
   if (htmlhorse) {
+    socket.emit('F2B_dropdownhistoriek', "0")
     console.log('horses')
     gethorses()
     listenToSocket();
@@ -249,6 +260,7 @@ const init = function () {
     
   }
   if (htmlhome) {
+    socket.emit('F2B_dropdownhistoriek', "0")
     console.log('licht')
     map = L.map('map').setView([50.84, 3.30], 15);
     L.tileLayer(provider, { attribution: copyright }).addTo(map);
@@ -260,6 +272,7 @@ const init = function () {
     layergroup = L.layerGroup().addTo(map);
   }
   if (htmltracking) {
+    socket.emit('F2B_dropdownhistoriek', "0")
     console.log("tracking")
     map = L.map('map').setView([50.84, 3.30], 15);
     L.tileLayer(provider, { attribution: copyright }).addTo(map);
@@ -268,6 +281,7 @@ const init = function () {
     layergroup = L.layerGroup().addTo(map);
   }
   if (htmlsettings){
+    socket.emit('F2B_dropdownhistoriek', "0")
     console.log("settings")
     listenToSocket()
   }

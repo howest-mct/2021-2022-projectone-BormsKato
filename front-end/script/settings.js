@@ -7,8 +7,6 @@ const addEventListeners = function () {
     checkValues();
   });
   htmlMijnButton.addEventListener('click', ShowLightPercentage);
-  let text = "Are you sure you want to light the device?";
-  document.getElementById("js-lightuser").innerHTML = text;
 };
 
 const checkValues = function () {
