@@ -40,7 +40,7 @@ i2c.open(1)
 vorigelatitude = 0.0
 vorigelongitude = 0.0
 
-globalid = 0
+globalid = "0"
 
 port="/dev/ttyS0"
 
@@ -311,7 +311,7 @@ def read_history():
     # dropdownhistoriek()
     global globalid
     print(f"geslecteerde paard id: {globalid}")
-    if globalid == 0:
+    if globalid == "0":
         result = DataRepository.read_history()
         print("in id 0")
         return jsonify(result)

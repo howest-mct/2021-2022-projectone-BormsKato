@@ -42,14 +42,14 @@ function selectNum(){
     var strUser = document.getElementById("dropdownhistoriek").value;
     console.log('value' + strUser)
     if (
-      strUser != 0 
+      strUser >= 0 
     ) {
       console.log('in loop' + strUser)
       socket.emit('F2B_dropdownhistoriek', strUser)
       gethistory()
       
     } else {
-      console.log('in loop 0')
+      console.log('in loop ongeldig')
     }
   }
 
