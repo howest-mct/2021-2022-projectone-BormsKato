@@ -7,16 +7,6 @@ const addEventListeners = function () {
   console.log('blablabla')
 };
 
-const StartRoute = function(){
-    window.location.href = "tracking.html"
-    console.log("start route")
-    var start = Date.now()
-    console.time("timer");   //start time with name = timer
-    console.log(start)
-    console.timeEnd("timer")
-    
-}
-
 const gethorsenamehistoriek = function () {
     // const url = lanIP + '/api/v1/horses/';
     const url = backend + `/index/`
@@ -55,6 +45,9 @@ function selectNum(){
       strUser != 0 
     ) {
       console.log('in loop' + strUser)
+      socket.emit('F2B_dropdownhistoriek', strUser)
+      gethistory()
+      
     } else {
       console.log('in loop 0')
     }

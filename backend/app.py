@@ -40,6 +40,8 @@ i2c.open(1)
 vorigelatitude = 0.0
 vorigelongitude = 0.0
 
+globalid = 0
+
 port="/dev/ttyS0"
 
 # Code voor Hardware
@@ -304,8 +306,19 @@ def read_horses():
 @app.route(endpoint + '/latestroutes/', methods=['GET'])
 def read_history():
     print('Get history')
-    result = DataRepository.read_history()
-    return jsonify(result)
+    # result = DataRepository.read_history()
+    # return jsonify(result)
+    # dropdownhistoriek()
+    global globalid
+    print(f"geslecteerde paard id: {id}")
+    if id == 0:
+        result = DataRepository.read_history()
+        print("in id 0")
+        return jsonify(result)
+    else:
+        result = DataRepository.read_history_filtered(id)
+        print("in id andere")
+        return jsonify(result)
 
 @app.route(endpoint + '/index/', methods=['GET'])
 def read_horsename():
@@ -334,6 +347,11 @@ def Lightpercentage(light):
 def newhorse(naam, leeftijd):
     print(f'nieuw paard: {naam} {leeftijd}')
     DataRepository.add_horse(naam, leeftijd)
+
+@socketio.on('F2B_dropdownhistoriek')
+def dropdownhistoriek(id):
+    global globalid
+    globalid = id
         
 
 
