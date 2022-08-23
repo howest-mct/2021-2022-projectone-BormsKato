@@ -310,13 +310,13 @@ def read_history():
     # return jsonify(result)
     # dropdownhistoriek()
     global globalid
-    print(f"geslecteerde paard id: {id}")
-    if id == 0:
+    print(f"geslecteerde paard id: {globalid}")
+    if globalid == 0:
         result = DataRepository.read_history()
         print("in id 0")
         return jsonify(result)
     else:
-        result = DataRepository.read_history_filtered(id)
+        result = DataRepository.read_history_filtered(globalid)
         print("in id andere")
         return jsonify(result)
 
