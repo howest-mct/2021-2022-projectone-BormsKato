@@ -263,7 +263,7 @@ class MPU6050:
             values.append(byte)
         return values
 
-def Shutter():
+def Shutter(btn):
     # DeviceID=5
     # ActieID=2
     # Datum=datetime.now()
