@@ -28,8 +28,8 @@ ledPinR = 21
 btnPinR = Button(20)
 ledPinL = 24
 btnPinL = Button(23)
-startbtn = 26
-stopbtn = 19
+startbtn = Button(26)
+stopbtn = Button(19)
 
 inputwaardeldr = 70
 
@@ -61,7 +61,7 @@ def setup_gpio():
     btnPinR.on_press(pinkR)
     btnPinL.on_press(pinkL)
     stopbtn.on_press(Shutter)
-    
+
 
 def pinkR(pin):
     print("rechts pink")
