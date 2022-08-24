@@ -346,6 +346,7 @@ const init = function () {
     listenToSocket()
     listenToLatSocket()
     layergroup = L.layerGroup().addTo(map);
+    listenToStartTijdSocket()
   }
   if (htmlsettings){
     socket.emit('F2B_dropdownhistoriek', "0")

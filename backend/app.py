@@ -281,6 +281,11 @@ def sending_lightvalue():
         socketio.emit('lightdata', {'light': inputwaardeldr})
         time.sleep(1)
 
+def toonduurtijdroute(start):
+    print("in toonduurtijd")
+    print("start" + str(start))
+    socketio.emit('startdata', {'start': str(start)})
+
 
 # Code voor Flask
 
@@ -366,27 +371,17 @@ def deletehorse(paard):
     print(f"verwijderd paard: {paard}")
     DataRepository.delete_horse(paard)
         
-
+@socketio.on('F2B_startroute')
+def startroute():
+    print("route gestart!!!!!!")
+    starttijd = datetime.now()
+    print(starttijd)
+    toonduurtijdroute(starttijd)
 
 
 
 # START een thread op. Belangrijk!!! Debugging moet UIT staan op start van de server, anders start de thread dubbel op
 # werk enkel met de packages gevent en gevent-websocket.
-def all_out():
-    while True:
-        print('*** We zetten alles uit **')
-#         DataRepository.update_status_alle_lampen(0)
-#         GPIO.output(ledPin, 0)
-#         status = DataRepository.read_status_lampen()
-#         socketio.emit('B2F_status_lampen', {'lampen': status})
-#         time.sleep(15)
-
-def start_thread():
-    print("**** Starting THREAD ****")
-    thread = threading.Thread(target=all_out, args=(), daemon=True)
-    thread.start()
-
-
 def start_chrome_kiosk():
     import os
 

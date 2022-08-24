@@ -5,16 +5,15 @@ let htmlStartbtn;
 const addEventListeners = function () {
   htmlStartbtn.addEventListener('click', StartRoute);
   console.log('blablabla')
+  listenToStartTijdSocket()
 };
 
 const StartRoute = function(){
+    socket.emit('F2B_startroute');
     window.location.href = "tracking.html"
     console.log("start route")
-    var start = Date.now()
-    console.time("timer");   //start time with name = timer
-    console.log(start)
-    console.timeEnd("timer")
-    
+    listenToStartTijdSocket()
+    // console.time("timer");   //start time with name = timer
 }
 
 const gethorsename = function () {
@@ -62,6 +61,20 @@ function selectNum(){
       htmlStartbtn.disabled = true;
     }
   }
+
+
+const listenToStartTijdSocket = function () {
+  // Get start by connect
+  socket.on('B2F_connected', function (parameter) {
+    console.log(`Starttijd ${parameter.start}`);
+    // ShowTemp(parameter.temp)
+  });
+  // To get light by thread
+  socket.on('startdata', function (parameter) {
+    console.log(`Starttijd ${parameter.start}`);
+    // ShowTemp(parameter.temp)
+  });
+}
 
 const init3 = function () {
   console.info('DOM geladen');
