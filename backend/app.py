@@ -340,6 +340,7 @@ def shutter():
 @socketio.on('F2B_light')
 def Lightpercentage(light):
     global inputwaardeldr
+    socketio.emit('B2F_status_licht', {'light': light})
     print(f'ingestelde lichtsterkte: {light}')
     inputwaardeldr = int(light)
 

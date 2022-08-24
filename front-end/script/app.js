@@ -205,6 +205,22 @@ const listenToTempSocket = function () {
   });
 }
 
+const listenToIngesteldeTemp = function (){
+  // Get waarde by connect
+  socket.on('B2F_status_licht', function (parameter) {
+    console.log(parameter)
+    console.log(`Het is ${parameter.light} ingesteld`);
+    // ShowTemp(parameter.temp)
+    document.querySelector('.js-ingesteld').innerHTML = `<h4>De huidige ingestelde waarde is : ${parameter.light}</h4>`
+  });
+  // To get light by thread
+  socket.on('light', function (parameter) {
+    console.log(`Het is ${parameter.light} ingesteld`);
+    // ShowTemp(parameter.temp)
+    document.querySelector('.js-ingesteld').innerHTML = `<h4>De huidige ingestelde waarde is : ${parameter.light}</h4>`
+  });
+}
+
 // const listenToLatSocket = function () {
 //   // Get lat by connect
 //   socket.on('B2F_connected', function (parameter) {
@@ -334,7 +350,9 @@ const init = function () {
   if (htmlsettings){
     socket.emit('F2B_dropdownhistoriek', "0")
     console.log("settings")
+    
     listenToSocket()
+    listenToIngesteldeTemp()
   }
 };
 
