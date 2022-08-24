@@ -211,13 +211,13 @@ const listenToIngesteldeTemp = function (){
     console.log(parameter)
     console.log(`Het is ${parameter.light} ingesteld`);
     // ShowTemp(parameter.temp)
-    document.querySelector('.js-ingesteld').innerHTML = `<h4>De huidige ingestelde waarde is : ${parameter.light}</h4>`
+    document.querySelector('.js-ingesteld').innerHTML = `<h4>The backlights will turn on when the light percentage is below: ${parameter.light}%</h4>`
   });
   // To get light by thread
-  socket.on('light', function (parameter) {
+  socket.on('lightdata', function (parameter) {
     console.log(`Het is ${parameter.light} ingesteld`);
     // ShowTemp(parameter.temp)
-    document.querySelector('.js-ingesteld').innerHTML = `<h4>De huidige ingestelde waarde is : ${parameter.light}</h4>`
+    document.querySelector('.js-ingesteld').innerHTML = `<h4>The backlights will turn on when the light percentage is below: ${parameter.light}%</h4>`
   });
 }
 

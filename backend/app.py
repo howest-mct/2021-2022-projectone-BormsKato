@@ -275,6 +275,13 @@ def Shutter():
     lcd_string("",LCD_LINE_2)
     os.system("sudo shutdown -h now")
 
+def sending_lightvalue():
+    while True:
+        global inputwaardeldr
+        socketio.emit('lightdata', {'light': inputwaardeldr})
+        time.sleep(1)
+
+
 # Code voor Flask
 
 app = Flask(__name__)
@@ -429,6 +436,11 @@ def start_gps_thread():
     Threadgps = threading.Thread(target=gps, args=(), daemon=True)
     Threadgps.start()
 
+def send_lightingesteld_thread():
+    print("sending lightvalue")
+    Threadlightvalue = threading.Thread(target=sending_lightvalue, args=(), daemon=True)
+    Threadlightvalue.start()
+
 if __name__ == '__main__':
     lcd_init()
     setup_gpio()
@@ -458,6 +470,7 @@ if __name__ == '__main__':
             start_mpu_thread()
             start_ldr_thread()
             start_gps_thread()
+            send_lightingesteld_thread()
             time.sleep(1)
             socketio.run(app, debug=False, host='0.0.0.0')
         
