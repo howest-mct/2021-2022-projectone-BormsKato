@@ -5,12 +5,12 @@ let htmlStartbtn;
 const addEventListeners = function () {
   htmlStartbtn.addEventListener('click', StartRoute);
   console.log('blablabla')
-  listenToStartTijdSocket()
+  // listenToStartTijdSocket()
 };
 
 const StartRoute = function(){
+    // window.location.href = "tracking.html"
     socket.emit('F2B_startroute');
-    window.location.href = "tracking.html"
     console.log("start route")
     listenToStartTijdSocket()
     // console.time("timer");   //start time with name = timer
