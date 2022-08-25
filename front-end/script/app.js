@@ -309,10 +309,16 @@ socket.on('startdata', function (parameter) {
   console.log("hoi")
   console.log(parameter)
   console.log(`Starttijd ${parameter.start}`);
-  // // ShowTemp(parameter.temp)
 });
 }
 
+const listenToVerstrekenTijd = function () {
+socket.on('verstrekendata', function (parameter) {
+  console.log("verstreken")
+  console.log(parameter)
+  console.log(`verstreken ${parameter.verstreken}`);
+});
+}
 
 const init = function () {
   
@@ -346,6 +352,7 @@ const init = function () {
     listenToTempSocket()
     gethorsename()  
     listenToLatSocket()
+    listenToVerstrekenTijd()
     layergroup = L.layerGroup().addTo(map);
     
   }

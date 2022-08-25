@@ -44,6 +44,9 @@ vorigelongitude = 0.0
 
 globalid = "0"
 
+statusroute = 0
+starttijd = 0
+
 port="/dev/ttyS0"
 
 # Code voor Hardware
@@ -286,12 +289,31 @@ def sending_lightvalue():
         socketio.emit('lightdata', {'light': inputwaardeldr})
         time.sleep(1)
 
-def toonduurtijdroute(start):
-    print("in toonduurtijd")
+def startduurtijdroute(start):
+    global starttijd
+    starttijd = start
+    print(starttijd)
+    print("in startduurtijd")
     print("start" + str(start))
     startdata = str(start)
     socketio.emit('startdata', {'start': str(start)})
+    global statusroute
+    print("statusroute" + str(statusroute))
+    statusroute = 1
+    print("statusroute" + str(statusroute))
 
+def checktijdroute():
+    while True:
+        global statusroute, starttijd
+        if statusroute == 0:
+            print("status route 0")
+            time.sleep(1)
+        if statusroute ==1:
+            print("status 1")
+            verstreken = datetime.now() - starttijd
+            print(verstreken)
+            socketio.emit('verstrekendata', {'verstreken': str(verstreken)})
+            time.sleep(1)
 
 # Code voor Flask
 
@@ -382,7 +404,7 @@ def startroute(hallo):
     print("route gestart!!!!!!")
     starttijd = datetime.now()
     print(starttijd)
-    toonduurtijdroute(starttijd)
+    startduurtijdroute(starttijd)
 
 
 
@@ -442,6 +464,11 @@ def send_lightingesteld_thread():
     Threadlightvalue = threading.Thread(target=sending_lightvalue, args=(), daemon=True)
     Threadlightvalue.start()
 
+def start_checkroute_thread():
+    print("checking route")
+    Threadcheckroute = threading.Thread(target=checktijdroute, args=(), daemon=True)
+    Threadcheckroute.start()
+
 if __name__ == '__main__':
     lcd_init()
     setup_gpio()
@@ -472,6 +499,7 @@ if __name__ == '__main__':
             start_ldr_thread()
             start_gps_thread()
             send_lightingesteld_thread()
+            start_checkroute_thread()
             time.sleep(1)
             socketio.run(app, debug=False, host='0.0.0.0')
         

@@ -654,7 +654,7 @@ span:last-child {
   display: none;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .c-header__nav {
     display: block;
   }
