@@ -311,11 +311,6 @@ socket.on('startdata', function (parameter) {
   console.log(`Starttijd ${parameter.start}`);
   // // ShowTemp(parameter.temp)
 });
-// // To get light by thread
-// socket.on('startdata', function (parameter) {
-//   console.log(`Starttijd ${parameter.startdata}`);
-//   // ShowTemp(parameter.temp)
-// });
 }
 
 
@@ -324,7 +319,7 @@ const init = function () {
   const htmlhome = document.querySelector('.js-light')
   const htmlhistory = document.querySelector('.js-table-history')
   const htmlhorse = document.querySelector('.js-table-horses')
-  const htmltracking = document.querySelector('.js-tracking')
+  // const htmltracking = document.querySelector('.js-tracking')
   const htmlsettings = document.querySelector('.js-settings')
 
 
@@ -351,22 +346,21 @@ const init = function () {
     listenToTempSocket()
     gethorsename()  
     listenToLatSocket()
-    // listenToStartTijdSocket()
     layergroup = L.layerGroup().addTo(map);
     
   }
-  if (htmltracking) {
-    console.log("in tracking")
-    socket.emit('F2B_dropdownhistoriek', "0")
-    console.log("tracking")
-    map = L.map('map').setView([50.84, 3.30], 15);
-    L.tileLayer(provider, { attribution: copyright }).addTo(map);
-    listenToSocket()
-    listenToLatSocket()
-    // listenToStartTijdSocket()
-    layergroup = L.layerGroup().addTo(map);
+  // if (htmltracking) {
+  //   console.log("in tracking")
+  //   socket.emit('F2B_dropdownhistoriek', "0")
+  //   console.log("tracking")
+  //   map = L.map('map').setView([50.84, 3.30], 15);
+  //   L.tileLayer(provider, { attribution: copyright }).addTo(map);
+  //   listenToSocket()
+  //   listenToLatSocket()
+  //   // listenToStartTijdSocket()
+  //   layergroup = L.layerGroup().addTo(map);
     
-  }
+  // }
   if (htmlsettings){
     socket.emit('F2B_dropdownhistoriek', "0")
     console.log("settings")

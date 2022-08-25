@@ -61,6 +61,7 @@ def setup_gpio():
     btnPinR.on_press(pinkR)
     btnPinL.on_press(pinkL)
     stopbtn.on_press(Shutter)
+    startbtn.on_press(startroute)
 
 
 def pinkR(pin):
@@ -377,7 +378,7 @@ def deletehorse(paard):
     DataRepository.delete_horse(paard)
         
 @socketio.on('F2B_startroute')
-def startroute():
+def startroute(hallo):
     print("route gestart!!!!!!")
     starttijd = datetime.now()
     print(starttijd)

@@ -10,7 +10,7 @@ const addEventListeners = function () {
 
 const StartRoute = function(){
     // window.location.href = "tracking.html"
-    socket.emit('F2B_startroute');
+    socket.emit('F2B_startroute', "hallo");
     console.log("start route")
     listenToStartTijdSocket()
     // console.time("timer");   //start time with name = timer
