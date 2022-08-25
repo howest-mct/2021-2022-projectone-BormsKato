@@ -303,6 +303,21 @@ socket.on('gpsdata', function (parameter) {
 }
 
 
+const listenToStartTijdSocket = function () {
+  // Get start by connect
+socket.on('startdata', function (parameter) {
+  console.log("hoi")
+  // console.log(parameter)
+  // console.log(`Starttijd ${parameter.startdata}`);
+  // // ShowTemp(parameter.temp)
+});
+// // To get light by thread
+// socket.on('startdata', function (parameter) {
+//   console.log(`Starttijd ${parameter.startdata}`);
+//   // ShowTemp(parameter.temp)
+// });
+}
+
 
 const init = function () {
   
@@ -336,7 +351,9 @@ const init = function () {
     listenToTempSocket()
     gethorsename()  
     listenToLatSocket()
+    listenToStartTijdSocket()
     layergroup = L.layerGroup().addTo(map);
+    
   }
   if (htmltracking) {
     socket.emit('F2B_dropdownhistoriek', "0")
@@ -345,8 +362,9 @@ const init = function () {
     L.tileLayer(provider, { attribution: copyright }).addTo(map);
     listenToSocket()
     listenToLatSocket()
-    layergroup = L.layerGroup().addTo(map);
     listenToStartTijdSocket()
+    layergroup = L.layerGroup().addTo(map);
+    
   }
   if (htmlsettings){
     socket.emit('F2B_dropdownhistoriek', "0")

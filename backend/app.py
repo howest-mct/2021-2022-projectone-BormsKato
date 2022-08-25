@@ -288,6 +288,7 @@ def sending_lightvalue():
 def toonduurtijdroute(start):
     print("in toonduurtijd")
     print("start" + str(start))
+    startdata = str(start)
     socketio.emit('startdata', {'start': str(start)})
 
 

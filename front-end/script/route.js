@@ -63,18 +63,18 @@ function selectNum(){
   }
 
 
-const listenToStartTijdSocket = function () {
-  // Get start by connect
-  socket.on('B2F_connected', function (parameter) {
-    console.log(`Starttijd ${parameter.start}`);
-    // ShowTemp(parameter.temp)
-  });
-  // To get light by thread
-  socket.on('startdata', function (parameter) {
-    console.log(`Starttijd ${parameter.start}`);
-    // ShowTemp(parameter.temp)
-  });
-}
+// const listenToStartTijdSocket = function () {
+//   // Get start by connect
+//   socket.on('B2F_connected', function (parameter) {
+//     console.log(`Starttijd ${parameter.startdata}`);
+//     // ShowTemp(parameter.temp)
+//   });
+//   // To get light by thread
+//   socket.on('startdata', function (parameter) {
+//     console.log(`Starttijd ${parameter.startdata}`);
+//     // ShowTemp(parameter.temp)
+//   });
+// }
 
 const init3 = function () {
   console.info('DOM geladen');
