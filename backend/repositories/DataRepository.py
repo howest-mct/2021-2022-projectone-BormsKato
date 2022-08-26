@@ -56,12 +56,12 @@ class DataRepository:
 
     @staticmethod
     def read_history():
-        sql="SELECT H.naam,W.Datum, W.Afstand FROM wandelingHistoriek as W LEFT JOIN horses as H ON W.HorseId=H.HorseId ORDER BY W.Datum desc LIMIT 30 ;"
+        sql="SELECT H.naam,W.Datum, W.Duurtijd FROM wandelingHistoriek as W LEFT JOIN horses as H ON W.HorseId=H.HorseId ORDER BY W.Datum desc LIMIT 30 ;"
         return Database.get_rows(sql)
 
     @staticmethod
     def read_history_filtered(horseid):
-        sql="SELECT H.naam,W.Datum, W.Afstand FROM wandelingHistoriek as W LEFT JOIN horses as H ON W.HorseId=H.HorseId WHERE W.HorseId =%s ORDER BY W.Datum desc LIMIT 30 ;"
+        sql="SELECT H.naam,W.Datum, 'W.Duurtijd' FROM wandelingHistoriek as W LEFT JOIN horses as H ON W.HorseId=H.HorseId WHERE W.HorseId =%s ORDER BY W.Datum desc LIMIT 30 ;"
         params = [horseid]
         return Database.get_rows(sql, params)
 

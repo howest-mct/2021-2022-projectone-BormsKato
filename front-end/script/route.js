@@ -10,7 +10,7 @@ const addEventListeners = function () {
 
 const StartRoute = function(){
     var strUser = document.getElementById("dropdownhorse").value;
-    socket.emit('F2B_startroute', strUser, "hallo");
+    socket.emit('F2B_startroute', strUser);
     console.log("start route")
     console.log("in start user met user:" + strUser)
     listenToStartTijdSocket()

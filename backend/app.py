@@ -423,7 +423,7 @@ def stoproute(hallo):
     totaleDuur = stoptijd - starttijd
     print(stoptijd)
     print(f'totale duur route: {totaleDuur}')
-    DataRepository.create_log_wandelhistoriek(huidigpaard,starttijd,totaleDuur)
+    DataRepository.create_log_wandelhistoriek(huidigpaard,starttijd,str(totaleDuur))
     
 
 

@@ -102,7 +102,7 @@ const fill_table_history = function (jsonObject) {
     htmlString += ` <tr class="c-row u-table o-layout__item o-layout--gutter-lg">
         <td class="c-cell_second">${data.naam}</td>
         <td class="c-cell_second">${data.Datum}</td>
-        <td class="c-cell_second">${data.Afstand} km</td>
+        <td class="c-cell_second">${data.Duurtijd}</td>
         
       </tr>`
   }
