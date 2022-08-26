@@ -9,6 +9,7 @@ const copyright =
 
 let map, layergroup;
 let htmlhome 
+var routebezig = 0
 
 
 const gethorses = function () {
@@ -309,6 +310,9 @@ socket.on('startdata', function (parameter) {
   console.log("hoi")
   console.log(parameter)
   console.log(`Starttijd ${parameter.start}`);
+  
+  routebezig = 1;
+  console.log(routebezig)
 });
 }
 
@@ -317,6 +321,8 @@ socket.on('verstrekendata', function (parameter) {
   console.log("verstreken")
   console.log(parameter)
   console.log(`verstreken ${parameter.verstreken}`);
+  let htmlString = `<p>Duurtijd: ${parameter.verstreken}</p>`;
+  document.querySelector('.js-showduurtijd').innerHTML = htmlString
 });
 }
 

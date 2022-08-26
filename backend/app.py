@@ -315,6 +315,8 @@ def checktijdroute():
             socketio.emit('verstrekendata', {'verstreken': str(verstreken)})
             time.sleep(1)
 
+
+
 # Code voor Flask
 
 app = Flask(__name__)
@@ -485,7 +487,7 @@ if __name__ == '__main__':
         while len(ip)< 7 and ip[0:1] != 1:
             ipfull=str(check_output(['ip','a']))
             # min=int(ipfull.find('172.30.252'))
-            min=int(ipfull.find('192.168.1.'))
+            min=int(ipfull.find('192.168.143.'))
             ip=str(ipfull[min:min +13])
             # print(ip)
             time.sleep(1)

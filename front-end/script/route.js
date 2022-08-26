@@ -1,19 +1,26 @@
 'use strict';
 
-let htmlStartbtn;
+let htmlStartbtn, htmlStopbtn;
 
 const addEventListeners = function () {
   htmlStartbtn.addEventListener('click', StartRoute);
+  htmlStopbtn.addEventListener('click', StopRoute);
   console.log('blablabla')
-  // listenToStartTijdSocket()
 };
 
 const StartRoute = function(){
-    // window.location.href = "tracking.html"
     socket.emit('F2B_startroute', "hallo");
     console.log("start route")
     listenToStartTijdSocket()
-    // console.time("timer");   //start time with name = timer
+    htmlStartbtn.disabled = true;
+}
+
+const StopRoute = function(){
+  socket.emit('F2B_stoproute', "hallo");
+  console.log("stop route")
+  // listenToStopTijdSocket()
+  htmlStopbtn.disabled = true;
+  routebezig = 1;
 }
 
 const gethorsename = function () {
@@ -52,38 +59,43 @@ const error_get_horsename = function () {
 function selectNum(){
     var strUser = document.getElementById("dropdownhorse").value;
     console.log('value' + strUser)
+    console.log({routebezig})
     // htmlStartbtn = document.querySelector('.js-startbtn')
     if (
+      routebezig == 0 &&
       strUser != 0 
+      
     ) {
+      console.log({routebezig})
       htmlStartbtn.disabled = false;
     } else {
       htmlStartbtn.disabled = true;
     }
   }
 
+function checkIfRouteIsActive(){
+  console.log({routebezig})
+  // htmlStartbtn = document.querySelector('.js-startbtn')
+  if (
+    routebezig == 1
+    
+  ) {
+    htmlStopbtn.disabled = false;
+  } else {
+    htmlStopbtn.disabled = true;
+  }
+}
 
-// const listenToStartTijdSocket = function () {
-//   // Get start by connect
-//   socket.on('B2F_connected', function (parameter) {
-//     console.log(`Starttijd ${parameter.startdata}`);
-//     // ShowTemp(parameter.temp)
-//   });
-//   // To get light by thread
-//   socket.on('startdata', function (parameter) {
-//     console.log(`Starttijd ${parameter.startdata}`);
-//     // ShowTemp(parameter.temp)
-//   });
-// }
 
 const init3 = function () {
   console.info('DOM geladen');
   //ik mag mijn variabele pas een waarde geven al de DOMcontentloaded gebeurd is
   htmlStartbtn = document.querySelector('.js-startbtn');
+  htmlStopbtn = document.querySelector('.js-stopbtn');
   const htmlhome = document.querySelector('.js-light')
-//   htmlStopbtn = document.querySelector('.js-stopbtn')
   //plaats de knop inactief
-//   htmlStartbtn.disabled = true;
+  // htmlStartbtn.disabled = true;
+  // htmlStopbtn.disabled = true;
   //luisteren naar mijn eventListeners
   if (htmlhome)
     addEventListeners();
