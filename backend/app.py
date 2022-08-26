@@ -408,6 +408,15 @@ def startroute(hallo):
     print(starttijd)
     startduurtijdroute(starttijd)
 
+@socketio.on('F2B_stoproute')
+def stoproute(hallo):
+    global statusroute
+    statusroute = 0
+    print("route gestopt!!!!!!")
+    stoptijd = datetime.now()
+    print(stoptijd)
+    # startduurtijdroute(starttijd)
+
 
 
 # START een thread op. Belangrijk!!! Debugging moet UIT staan op start van de server, anders start de thread dubbel op

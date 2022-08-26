@@ -887,6 +887,19 @@ tb .u-container_design {
   margin-right: 20px;
 }
 
+.u-buttonnietactief {
+  display: block;
+  background-color: #786C6C;
+  border-color: #786C6C;
+  color: white;
+  font-weight: bold;
+  padding: 10px 17.5px;
+  min-width: fit-content;
+  min-height: fit-content;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
 .u-buttonshut {
   display: block;
   background-color: #FFFFFF;

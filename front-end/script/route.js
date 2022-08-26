@@ -13,6 +13,10 @@ const StartRoute = function(){
     console.log("start route")
     listenToStartTijdSocket()
     htmlStartbtn.disabled = true;
+    htmlStopbtn.disabled = false
+    checkhorse()
+    document.getElementById('startbtn').setAttribute("class", "u-buttonnietactief");
+    document.getElementById('stopbtn').setAttribute("class", "u-button");
 }
 
 const StopRoute = function(){
@@ -20,7 +24,11 @@ const StopRoute = function(){
   console.log("stop route")
   // listenToStopTijdSocket()
   htmlStopbtn.disabled = true;
-  routebezig = 1;
+  // htmlStartbtn.disabled = false
+  
+  routebezig = 0;
+  document.getElementById('stopbtn').setAttribute("class", "u-buttonnietactief");
+  document.getElementById('startbtn').setAttribute("class", "u-button");
 }
 
 const gethorsename = function () {
@@ -56,7 +64,7 @@ const error_get_horsename = function () {
   
   }
 
-function selectNum(){
+function checkhorse(){
     var strUser = document.getElementById("dropdownhorse").value;
     console.log('value' + strUser)
     console.log({routebezig})
@@ -73,18 +81,18 @@ function selectNum(){
     }
   }
 
-function checkIfRouteIsActive(){
-  console.log({routebezig})
-  // htmlStartbtn = document.querySelector('.js-startbtn')
-  if (
-    routebezig == 1
+// function checkIfRouteIsActive(){
+//   console.log({routebezig})
+//   // htmlStartbtn = document.querySelector('.js-startbtn')
+//   if (
+//     routebezig == 1
     
-  ) {
-    htmlStopbtn.disabled = false;
-  } else {
-    htmlStopbtn.disabled = true;
-  }
-}
+//   ) {
+//     htmlStopbtn.disabled = false;
+//   } else {
+//     htmlStopbtn.disabled = true;
+//   }
+// }
 
 
 const init3 = function () {
@@ -92,7 +100,8 @@ const init3 = function () {
   //ik mag mijn variabele pas een waarde geven al de DOMcontentloaded gebeurd is
   htmlStartbtn = document.querySelector('.js-startbtn');
   htmlStopbtn = document.querySelector('.js-stopbtn');
-  const htmlhome = document.querySelector('.js-light')
+  const htmlhome = document.querySelector('.js-light');
+  document.getElementById('stopbtn').setAttribute("class", "u-buttonnietactief");
   //plaats de knop inactief
   // htmlStartbtn.disabled = true;
   // htmlStopbtn.disabled = true;

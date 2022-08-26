@@ -358,6 +358,7 @@ const init = function () {
     listenToTempSocket()
     gethorsename()  
     listenToLatSocket()
+    listenToStartTijdSocket()
     listenToVerstrekenTijd()
     layergroup = L.layerGroup().addTo(map);
     
