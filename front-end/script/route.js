@@ -24,7 +24,7 @@ const StopRoute = function(){
   console.log("stop route")
   // listenToStopTijdSocket()
   htmlStopbtn.disabled = true;
-  // htmlStartbtn.disabled = false
+  htmlStartbtn.disabled = false
   
   routebezig = 0;
   document.getElementById('stopbtn').setAttribute("class", "u-buttonnietactief");

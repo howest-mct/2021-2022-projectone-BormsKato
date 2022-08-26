@@ -310,7 +310,10 @@ socket.on('startdata', function (parameter) {
   console.log("hoi")
   console.log(parameter)
   console.log(`Starttijd ${parameter.start}`);
-  
+  htmlStartbtn.disabled = true;
+  htmlStopbtn.disabled = false
+  document.getElementById('startbtn').setAttribute("class", "u-buttonnietactief");
+  document.getElementById('stopbtn').setAttribute("class", "u-button");
   routebezig = 1;
   console.log(routebezig)
 });
