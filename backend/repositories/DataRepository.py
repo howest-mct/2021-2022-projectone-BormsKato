@@ -83,3 +83,9 @@ class DataRepository:
         sql="INSERT INTO Historiek(`DeviceId`,`Actieid`,`Actiedatum`,`Waarde`,`Commentaar`) VALUES (%s,%s,%s,%s,%s)"
         params = [device, actie, datum, waarde, commentaar]
         return Database.execute_sql(sql, params)
+
+    @staticmethod
+    def create_log_wandelhistoriek(horseid, datum, duurtijd):
+        sql="INSERT INTO wandelingHistoriek(`HorseId`,`Datum`,`Duurtijd`) VALUES (%s,%s,%s)"
+        params = [horseid, datum, duurtijd]
+        return Database.execute_sql(sql, params)

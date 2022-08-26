@@ -324,7 +324,7 @@ socket.on('verstrekendata', function (parameter) {
   console.log("verstreken")
   console.log(parameter)
   console.log(`verstreken ${parameter.verstreken}`);
-  let htmlString = `<p>Duurtijd: ${parameter.verstreken}</p>`;
+  let htmlString = `<p>Duration: ${parameter.verstreken}</p>`;
   document.querySelector('.js-showduurtijd').innerHTML = htmlString
 });
 }

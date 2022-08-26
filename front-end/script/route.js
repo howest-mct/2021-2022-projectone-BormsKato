@@ -9,8 +9,10 @@ const addEventListeners = function () {
 };
 
 const StartRoute = function(){
-    socket.emit('F2B_startroute', "hallo");
+    var strUser = document.getElementById("dropdownhorse").value;
+    socket.emit('F2B_startroute', strUser, "hallo");
     console.log("start route")
+    console.log("in start user met user:" + strUser)
     listenToStartTijdSocket()
     htmlStartbtn.disabled = true;
     htmlStopbtn.disabled = false

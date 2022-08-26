@@ -46,6 +46,7 @@ globalid = "0"
 
 statusroute = 0
 starttijd = 0
+huidigpaard = 0
 
 port="/dev/ttyS0"
 
@@ -402,20 +403,28 @@ def deletehorse(paard):
     DataRepository.delete_horse(paard)
         
 @socketio.on('F2B_startroute')
-def startroute(hallo):
+def startroute(strUser):
     print("route gestart!!!!!!")
+    if strUser == 26:
+        strUser = "NULL"
+    global huidigpaard
+    huidigpaard = strUser
+    print(f"user van frontend: {strUser}")
     starttijd = datetime.now()
     print(starttijd)
     startduurtijdroute(starttijd)
 
 @socketio.on('F2B_stoproute')
 def stoproute(hallo):
-    global statusroute
+    global statusroute, huidigpaard, starttijd
     statusroute = 0
     print("route gestopt!!!!!!")
     stoptijd = datetime.now()
+    totaleDuur = stoptijd - starttijd
     print(stoptijd)
-    # startduurtijdroute(starttijd)
+    print(f'totale duur route: {totaleDuur}')
+    DataRepository.create_log_wandelhistoriek(huidigpaard,starttijd,totaleDuur)
+    
 
 
 
