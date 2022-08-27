@@ -30,6 +30,7 @@ ledPinL = 24
 btnPinL = Button(23)
 startbtn = Button(26)
 stopbtn = Button(19)
+stoproutebtn = Button(13)
 
 inputwaardeldr = 70
 
@@ -46,7 +47,7 @@ globalid = "0"
 
 statusroute = 0
 starttijd = 0
-huidigpaard = 0
+huidigpaard = 26
 
 port="/dev/ttyS0"
 
@@ -66,6 +67,7 @@ def setup_gpio():
     btnPinL.on_press(pinkL)
     stopbtn.on_press(Shutter)
     startbtn.on_press(startroute)
+    stoproutebtn.on_press(stoproute)
 
 
 def pinkR(pin):
@@ -406,7 +408,7 @@ def deletehorse(paard):
 def startroute(strUser):
     print("route gestart!!!!!!")
     if strUser == 26:
-        strUser = "NULL"
+        strUser = 17
     global huidigpaard
     huidigpaard = strUser
     print(f"user van frontend: {strUser}")
@@ -421,6 +423,7 @@ def stoproute(hallo):
     print("route gestopt!!!!!!")
     stoptijd = datetime.now()
     totaleDuur = stoptijd - starttijd
+    socketio.emit('stoptijd', {'stoptijd': str(stoptijd)})
     print(stoptijd)
     print(f'totale duur route: {totaleDuur}')
     DataRepository.create_log_wandelhistoriek(huidigpaard,starttijd,str(totaleDuur))
@@ -520,7 +523,7 @@ if __name__ == '__main__':
             start_gps_thread()
             send_lightingesteld_thread()
             start_checkroute_thread()
-            time.sleep(1)
+            # time.sleep(1)
             socketio.run(app, debug=False, host='0.0.0.0')
         
         

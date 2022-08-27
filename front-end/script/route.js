@@ -33,6 +33,18 @@ const StopRoute = function(){
   document.getElementById('startbtn').setAttribute("class", "u-button");
 }
 
+const StopRoutefrombackend = function(){
+  // socket.emit('F2B_stoproute', "hallo");
+  console.log("stop route")
+  // listenToStopTijdSocket()
+  htmlStopbtn.disabled = true;
+  htmlStartbtn.disabled = false
+  
+  routebezig = 0;
+  document.getElementById('stopbtn').setAttribute("class", "u-buttonnietactief");
+  document.getElementById('startbtn').setAttribute("class", "u-button");
+}
+
 const gethorsename = function () {
     // const url = lanIP + '/api/v1/horses/';
     const url = backend + `/index/`

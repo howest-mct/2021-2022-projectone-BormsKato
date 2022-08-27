@@ -329,6 +329,14 @@ socket.on('verstrekendata', function (parameter) {
 });
 }
 
+const listenToStopTijdSocket = function() {
+socket.on('stoptijd', function(parameter){
+  console.log(`gestopt ${parameter.stoptijd}`)
+  StopRoutefrombackend()
+}
+)
+}
+
 const init = function () {
   
   const htmlhome = document.querySelector('.js-light')
@@ -363,6 +371,7 @@ const init = function () {
     listenToLatSocket()
     listenToStartTijdSocket()
     listenToVerstrekenTijd()
+    listenToStopTijdSocket()
     layergroup = L.layerGroup().addTo(map);
     
   }
